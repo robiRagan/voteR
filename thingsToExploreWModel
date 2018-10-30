@@ -1,0 +1,74 @@
+---------------------------------------
+Questions to explore with the model:
+=========================================
+- A "think" paper on the role of assumptions in spatial models and especially in the use of implicit spatial logic w/o a model. Or maybe this is the PA paper. 
+    "The discovery of a condition under which equilibria is obtained in a spatial model usually results in modelers adding another assumption to the list of "complete, transitive, single peaked, symmetric, perferct unformation, risk neutral, yada yada... Rather than resulting in wresting with the usefulness of a given set of assumptions for a given political situation. This is largely owing to the fact that in order to say anything one needs an equlibrium prediction for which a comparative static can be generated. All the messy complications that may result from relaxing the laundry list of assumptions and further considering the interactions between the assumptions is ignored. The tool I have created will no allow researchers to consider the "in between " cases. "
+
+- An evolutionary Tournement of Party Stratigies (like Kristian Lindgren's take on the Axelrod tournement). Take the Fowler Tournemnt and make it evolutionary. See Origin of Wealth Chapter 10 for example of Lindgren's tournemnt.
+
+- Mine and Aaron Houck's question about shared preferences.
+
+- Structurally Induced versus Preference Induced Stability
+
+- Eliptical Indifference Curves and Balloning Federal Budget (Stewart: Analizing Congress p.40 and 1991 Lessons form Post-Civil War Era) (McCubbins 1991 "Party Governance and US Budget")  
+
+- Degree of voter heterogeneity needed for proximity voting to be externally valid.
+        See
+        EUCLIDEAN REVEALED PREFERENCES: TESTING THE SPATIAL VOTING MODEL
+        Marc Henry*, Ismael Mourifié
+        Journal of Applied Econometrics
+        In the spatial model of voting, voters choose the candidate closest to them in the ideological space. Recent work by Degan and Merlo in 2009 shows that it is falsifiable on the basis of individual voting data in multiple elections. We show how to tackle the fact that the model only partially identifies the distribution of voting profiles and we give a formal revealed preference test of the spatial voting model in three national elections in the USA, and strongly reject the spatial model in all cases. We also construct confidence regions for partially identified voter characteristics in an augmented model with unobserved valence dimension, and ****identify the amount of voter heterogeneity**** necessary to reconcile the data with spatial preferences.
+
+
+
+- The second has been much less developed and emphasises how systemic factors might lead types of voters to adopt different decision- making patterns. In relation to this, some authors have analysed the condi- tional relationship between the implications derived from a spatial logic of electoral competition and the institutional context in which an election takes place (Cox 1990a, 1990b; Kedar 2005a, 2005b, 2006; Ezrow 2008b). Surprisingly enough, there are very few attempts to tackle this controversy by introducing contextual determinants of the performance of both theories. And when this is done, it is either motivated by the proposition of an alternative model that bypasses rather than tackles the direct comparison of the two original formu- lations, or else fails to analyse explicitly the implications stemming from the two models.
+European Journal of Political Research 49: 759–786, 2010 "Systemic polarisation and spatial voting" SERGI PARDOS-PRADO & ELIAS DINAS
+
+      - Sartori’s idea of the spatial elasticity of the political spectrum – leads to different spatial viewpoints.
+
+
+- Relationship between all of the different solution concepts:
+
+    - For example see: "A Non-empty Core May Not Coincide with the Uncovered Set in Spatial Voting Situations" Anindya Bhattacharya,Victoria Brosi, Francesco Ciardiello. York Discussion Papers in Economics
+          - "In this note it is shown that in contradiction to the well-known claim in Cox [4] (repeated in a number of subsequent works), the uncovered set in a spatial voting situation does not necessarily coincide with the core even when the core is non-empty."
+
+          - "Cox made the claim that if individual preferences satisfy a very ****innocuous symmetry condition**** then the uncovered set coincides with the core whenever the latter is non-empty."
+
+- Look at the role of distributions in the spatial model:
+    See:
+    A critique of distributional analysis in the spatial model Craig A. Tovey
+            Distributional analysis is widely used to study social choice in Euclidean models (Tullock, 1967a, Tullock, 1967b, Arrow, 1969, Davis et al., 1972, Grandmont, 1978, McKelvey et al., 1980, Demange, 1982 and Caplin and Nalebuff, 1988, e.g). This method assumes a continuum of voters distributed according to a probability measure. Since infinite populations do not exist, the goal of distributional analysis is to give an insight into the behavior of large finite populations. However, the properties of finite populations do not necessarily converge to the properties of infinite populations. Thus the method of distributional analysis is flawed. In some cases (Arrow, 1969) it will predict that a point is in the core with probability 1, while the true probability converges to 0. In other cases it can be combined with probabilistic analysis to make accurate predictions about the asymptotic behavior of large populations, as in Caplin and Nalebuff (1988). Uniform convergence of empirical measures (Pollard, 1984) is employed here to yield a simpler, more general proof of α-majority convergence, a short proof of yolk shrinkage, and suggests a rule of thumb to determine the accuracy of distribution-based predictions. The results also help clarify the mathematical underpinnings of statistical analysis of empirical voting data.
+
+- How do the different ideal point estimators preform under the different combinations of parameters:
+    - NOMINATE
+    - IDEAL - Clinton, Jackman, and Rivers (2004)
+    - Heckman and Snyder (1997)
+    - Londregan (2000a), 
+    - Martin and Quinn (2002), 
+    - and Poole (2000)
+    - Lauderdale has a model that is specifically supposed to handle voter heterogeneity
+
+            "Ideal point estimators are typically based on an assumption that all legislators are equally responsive to modeled dimensions of legislative disagreement; however, particularistic constituency interests and idiosyncrasies of individual legislators introduce variation in the degree to which legislators cast votes predictably. I introduce a Bayesian heteroskedastic ideal point estimator and demonstrate by Monte Carlo simulation that it outperforms standard homoskedastic estimators at recovering the relative positions of legislators. In addition to providing a refinement of ideal point estimates, the heteroskedastic estimator recovers legislator-specific error variance parameters that describe the extent to which each legislator's voting behavior is not conditioned on the primary axes of disagreement in the legislature. Through applications to the roll call histories of the U.S. Congress, the E.U. Parliament, and the U.N. General Assembly, I demonstrate how to use the heteroskedastic estimator to study substantive questions related to legislative incentives for low-dimensional voting behavior as well as diagnose unmodeled dimensions and nonconstant ideal points. Ben Lauderdale Political Analysis (2010) 18 (2): 151-171. "Unpredictable Voters in Ideal Point Estimation"
+
+  -  JOSHUA D. CLINTON, SIMON JACKMAN Address the strengths of the Bayesian approach here: "To Simulate or NOMINATE?" Legislative Studies Quarterly
+Volume 34, Issue 4, pages 593–621, November 2009 ,
+
+            "Carroll et al. (2009) summarize the similarities and differences between the NOMINATE and IDEAL methods of fitting spatial voting models to binary roll-call data. As those authors note, for the class of problems with which either NOMINATE and the Bayesian quadratic-normal model can be used, the ideal point estimates almost always coincide, and when they do not, the discrepancy is due to the somewhat arbitrary identification and computational constraints imposed by each method. There are, however, many problems for which the Bayesian quadratic-normal model can be easily generalized, so as to address a broad array of questions and take advantage of additional data. Given the nature and source of the differences between NOMINATE and the Bayesian approach—as well as the fact that both approaches are approximations of the decision-making processes being modeled—we believe that it is preferable to choose the more flexible Bayesian approach."
+
+
+- Something addressing the idea that in a  complex adaptive system searching for equlibrium makes not sense, we should instead search for stability while allowing the most "obvious" (hmmm??) parameters to be endogeneous. 
+
+- ON THE SIZE AND LOCATION OF THE YOLK IN SPATIAL VOTING GAMES: RESULTS USING CYBERSENATE SOFTWARE, Miller and Godfrey
+
+      The yolk is the set of points bounded by the smallest circle that intersects every median line in a two-dimensional spatial voting game. While the character of such voting games clearly depends critically on the location and size of the yolk, until recently it has been difficult make useful generalizationsaboutthesematters. Toveyhasshownthat,ifvoteridealpointsarerandomlydrawn from a “centered” continuous distribution, the expected yolk radius decreases as the number of voters increases, approaching zero as the number of voters increases without limit. This result leaves open two questions: (1) the rate at which the yolk shrinks as the number of voters increases, and (2) the impact on the size and location of the yolk of the distinctive “non-random” clustering of ideal points typicallyseeninempiricaldata. UsingCyberSenatespatialvotingsoftware,wecanprovide answers to these questions.
+
+
+- Heterogeneity and the rationality of group choice generated by different voting rules.
+
+      - Kenjiro Nakamura (1947–1979), a Japanese game theorist who proved the above fact that the rationality of collective choice critically depends on the number of alternatives. (Suzuki, Mitsuo (1981).  Game theory and social choice: Selected papers of Kenjiro Nakamura.)
+
+
+- Optimal K-Majority stuff: Dougherty and Edwards may have already done this.
+
+
+- What are the implications of endogeneous agenda formation for NOMINATE? See Greg's "Counterfactuals" paper.

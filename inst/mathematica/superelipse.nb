@@ -1,0 +1,220 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8138,        212]
+NotebookOptionsPosition[      7808,        195]
+NotebookOutlinePosition[      8165,        211]
+CellTagsIndexPosition[      8122,        208]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\n", "\t", 
+  RowBox[{
+   RowBox[{"ParametricPlot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "@", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"sgnx", " ", "a", " ", "d", " ", 
+           RowBox[{
+            RowBox[{"Cos", "[", "t", "]"}], "^", 
+            RowBox[{"(", 
+             RowBox[{"2", "/", "m"}], ")"}]}]}], ",", " ", 
+          RowBox[{"sgny", " ", "b", " ", "d", " ", 
+           RowBox[{
+            RowBox[{"Sin", "[", "t", "]"}], "^", 
+            RowBox[{"(", 
+             RowBox[{"2", "/", "m"}], ")"}]}]}]}], "}"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"sgnx", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"sgny", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "1"}], "}"}]}], "}"}]}], "]"}]}], ",", 
+     "\n", "\t\t", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", 
+       RowBox[{"Pi", "/", "2"}]}], "}"}], ",", "\n", "\t\t", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", "\n", "\t\t", 
+     RowBox[{"PlotStyle", "->", 
+      RowBox[{"Hue", "[", 
+       RowBox[{"0.67", ",", " ", "0.6", ",", " ", "0.6"}], "]"}]}], ",", "\n",
+      "\t\t", 
+     RowBox[{"Frame", "\[Rule]", "frameQ"}], ",", "\n", "\t\t", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"400", ",", "400"}], "}"}]}], ",", "\n", "\t\t", 
+     RowBox[{"FrameLabel", "\[Rule]", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Style", "[", 
+          RowBox[{"#", ",", "Italic"}], "]"}], "&"}], " ", "/@", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<x\>\"", ",", "Italic"}], "]"}], ",", 
+          RowBox[{"Style", "[", 
+           RowBox[{"\"\<y\>\"", ",", "Italic"}], "]"}]}], "}"}]}], ")"}]}], 
+     ",", "\n", "\t\t", 
+     RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"Axes", "\[Rule]", "frameQ"}]}], "\n", "\t", "]"}], ",", 
+   "\[IndentingNewLine]", "       ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"d", ",", "1", ",", "\"\<d\>\""}], "}"}], ",", 
+     RowBox[{"1", "/", "3"}], ",", "3", ",", " ", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", "\n",
+    "\t", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "1", ",", "\"\<a\>\""}], "}"}], ",", 
+     RowBox[{"1", "/", "3"}], ",", "3", ",", " ", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", "\n",
+    "\t", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"b", ",", "1", ",", "\"\<b\>\""}], "}"}], ",", 
+     RowBox[{"1", "/", "3"}], ",", "3", ",", " ", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", " ", 
+   "\n", "\t", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "2", ",", "\"\<m\>\""}], "}"}], ",", "0.25", ",", 
+     "10", ",", " ", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"frameQ", ",", "True", ",", "\"\<frame and axes\>\""}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}]}], "\n", "]"}]], "Input",\
+
+ CellChangeTimes->{{3.671921581393458*^9, 3.6719215873343782`*^9}, {
+  3.671921620453178*^9, 3.6719216310946093`*^9}, {3.671921666995515*^9, 
+  3.671921677271841*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`a$$ = 1, $CellContext`b$$ = 
+    1, $CellContext`d$$ = 0.9946666666666666, $CellContext`frameQ$$ = 
+    True, $CellContext`m$$ = 1.02, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`d$$], 1, "d"}, 
+      Rational[1, 3], 3}, {{
+       Hold[$CellContext`a$$], 1, "a"}, 
+      Rational[1, 3], 3}, {{
+       Hold[$CellContext`b$$], 1, "b"}, 
+      Rational[1, 3], 3}, {{
+       Hold[$CellContext`m$$], 2, "m"}, 0.25, 10}, {{
+       Hold[$CellContext`frameQ$$], True, "frame and axes"}, {True, False}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`d$57277$$ = 0, $CellContext`a$57278$$ = 
+    0, $CellContext`b$57279$$ = 0, $CellContext`m$57280$$ = 
+    0, $CellContext`frameQ$57281$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`a$$ = 1, $CellContext`b$$ = 
+        1, $CellContext`d$$ = 1, $CellContext`frameQ$$ = 
+        True, $CellContext`m$$ = 2}, "ControllerVariables" :> {
+        Hold[$CellContext`d$$, $CellContext`d$57277$$, 0], 
+        Hold[$CellContext`a$$, $CellContext`a$57278$$, 0], 
+        Hold[$CellContext`b$$, $CellContext`b$57279$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$57280$$, 0], 
+        Hold[$CellContext`frameQ$$, $CellContext`frameQ$57281$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ParametricPlot[
+        Evaluate[
+         Table[{$CellContext`sgnx $CellContext`a$$ $CellContext`d$$ 
+           Cos[$CellContext`t]^(
+             2/$CellContext`m$$), $CellContext`sgny $CellContext`b$$ \
+$CellContext`d$$ 
+           Sin[$CellContext`t]^(2/$CellContext`m$$)}, {$CellContext`sgnx, {-1,
+            1}}, {$CellContext`sgny, {-1, 1}}]], {$CellContext`t, 0, Pi/2}, 
+        PlotRange -> All, PlotStyle -> Hue[0.67, 0.6, 0.6], 
+        Frame -> $CellContext`frameQ$$, ImageSize -> {400, 400}, FrameLabel -> 
+        Map[Style[#, Italic]& , {
+           Style["x", Italic], 
+           Style["y", Italic]}], AspectRatio -> Automatic, 
+        Axes -> $CellContext`frameQ$$], 
+      "Specifications" :> {{{$CellContext`d$$, 1, "d"}, 
+         Rational[1, 3], 3, Appearance -> 
+         "Labeled"}, {{$CellContext`a$$, 1, "a"}, 
+         Rational[1, 3], 3, Appearance -> 
+         "Labeled"}, {{$CellContext`b$$, 1, "b"}, 
+         Rational[1, 3], 3, Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 2, "m"}, 0.25, 10, Appearance -> 
+         "Labeled"}, {{$CellContext`frameQ$$, True, "frame and axes"}, {
+         True, False}}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{445., {295., 300.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.671920328646985*^9, 3.6719215918759537`*^9, 
+  3.671921636297256*^9, 3.6719216828831053`*^9}]
+}, Open  ]]
+},
+WindowSize->{808, 911},
+WindowMargins->{{210, Automatic}, {202, Automatic}},
+FrontEndVersion->"10.4 for Mac OS X x86 (32-bit, 64-bit Kernel) (April 11, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 3588, 97, 335, "Input"],
+Cell[4171, 121, 3621, 71, 646, "Output"]
+}, Open  ]]
+}
+]
+*)
+
