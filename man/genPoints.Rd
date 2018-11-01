@@ -9,10 +9,10 @@ Generates one or two dimensional points from one of distributions in base R.
 The user can set up bounds on the dimensions. If bounds are set then genPoints() 
 will discard any points outside the bounds and resample.}
 \usage{
-genPoints(numberOfDimensionsGenPoints = 1, numberOfPointsGenPoints = 100,
-  distributionTypeGenPoints = "unif", dimOneBoundsGenPoints = c(-Inf, Inf),
-  dimTwoBoundsGenPoints = c(-Inf, Inf),
-  distributionParametersGenPoints = c(-1, 1))
+genPoints(numberOfDimensionsGenPoints = 1,
+  numberOfPointsGenPoints = 100, distributionTypeGenPoints = "unif",
+  dimOneBoundsGenPoints = c(-Inf, Inf), dimTwoBoundsGenPoints = c(-Inf,
+  Inf), distributionParametersGenPoints = c(-1, 1))
 }
 \arguments{
 \item{numberOfDimensionsGenPoints}{The number of policy dimensions.}
@@ -24,7 +24,7 @@ the ideal points from. Uses the base R random number generation family of
 commands rxxxx (see ?distributions). The user should specify the
 distribution as a string using the standard R abreviation for the
 distribution (see ?distributions for a list). Currently supported are: "norm",
-"unif", "binom", "cauchy", "chisq", "weibull"}
+"unif", "beta", "cauchy", "chisq", "weibull"}
 
 \item{dimOneBoundsGenPoints}{A vector that contains the starting and ending poitns of t
 he first dimension. Example: c(0,1). Defaults to c(-Inf, Inf) if no boundary is provided.}
@@ -56,7 +56,10 @@ Maybe add a warning if the user sets bounds and the resampling takes a long time
 \examples{
   genPoints(numberOfDimensionsGenPoints = 2, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "norm", distributionParametersGenPoints = c(0,.2), dimOneBoundsGenPoints = c(0,1), dimTwoBoundsGenPoints = c(-1,1))
   
-  betaPoints <- genPoints(numberOfDimensionsGenPoints = 2, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "beta", distributionParametersGenPoints = c(.1,.1), dimOneBoundsGenPoints = c(0,1), dimTwoBoundsGenPoints = c(0,1))
+  genPoints(numberOfDimensionsGenPoints = 2, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "beta", distributionParametersGenPoints = c(.1,.1), dimOneBoundsGenPoints = c(0,1), dimTwoBoundsGenPoints = c(0,1))
   
   genPoints(numberOfDimensionsGenPoints = 1, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "unif", distributionParametersGenPoints = c(-1,1))
+  
+  
+  
 }

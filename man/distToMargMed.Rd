@@ -5,7 +5,8 @@
 \title{distToMargMed
 Finds the distance between a set of points and the marginal median.}
 \usage{
-distToMargMed(competitorDataFrameDistToMargMed, marginalMedianDistToMargMedian)
+distToMargMed(competitorDataFrameDistToMargMed,
+  marginalMedianDistToMargMedian)
 }
 \arguments{
 \item{competitorDataFrameDistToMargMed}{competitor data frame}

@@ -10,8 +10,8 @@ genCompetitors(numberOfDimensionsGenCompetitors = 1,
   distributionTypeGenCompetitors = "unif",
   distributionParametersGenCompetitors = c(-1, 1),
   dimOneBoundsGenCompetitors = c(-Inf, Inf),
-  dimTwoBoundsGenCompetitors = c(-Inf, Inf), allHunterGenCompetitors = TRUE,
-  probabilityHunterGenCompetitors = 0,
+  dimTwoBoundsGenCompetitors = c(-Inf, Inf),
+  allHunterGenCompetitors = TRUE, probabilityHunterGenCompetitors = 0,
   probabilityAggregatorGenCompetitors = 0,
   probabilityPredatorGenCompetitors = 0)
 }

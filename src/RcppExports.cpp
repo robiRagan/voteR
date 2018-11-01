@@ -34,6 +34,10 @@ RcppExport SEXP _voteR_findICPoints(SEXP voterIDSEXP, SEXP idealPointSEXP, SEXP 
         UNPROTECT(1);
         Rf_onintr();
     }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
@@ -63,6 +67,10 @@ RcppExport SEXP _voteR_findParetoSet(SEXP idealPointsSEXP) {
     if (rcpp_isInterrupt_gen) {
         UNPROTECT(1);
         Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
     }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
@@ -97,6 +105,10 @@ RcppExport SEXP _voteR_findSuperElipseRadius(SEXP idealPointSEXP, SEXP altPointS
         UNPROTECT(1);
         Rf_onintr();
     }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
@@ -126,6 +138,10 @@ RcppExport SEXP _voteR_findWinSet(SEXP indifferenceCurvesSEXP) {
     if (rcpp_isInterrupt_gen) {
         UNPROTECT(1);
         Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
     }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
@@ -172,345 +188,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// icc
-IntegerVector icc(IntegerMatrix P, int N);
-RcppExport SEXP _voteR_icc(SEXP PSEXP, SEXP NSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    rcpp_result_gen = Rcpp::wrap(icc(P, N));
-    return rcpp_result_gen;
-END_RCPP
-}
-// iac
-Rcpp::IntegerVector iac(IntegerMatrix P, int N);
-RcppExport SEXP _voteR_iac(SEXP PSEXP, SEXP NSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    rcpp_result_gen = Rcpp::wrap(iac(P, N));
-    return rcpp_result_gen;
-END_RCPP
-}
-// weighted_pref
-IntegerVector weighted_pref(IntegerMatrix P, int N, NumericVector V);
-RcppExport SEXP _voteR_weighted_pref(SEXP PSEXP, SEXP NSEXP, SEXP VSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type V(VSEXP);
-    rcpp_result_gen = Rcpp::wrap(weighted_pref(P, N, V));
-    return rcpp_result_gen;
-END_RCPP
-}
-// prr
-Rcpp::IntegerMatrix prr(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P);
-RcppExport SEXP _voteR_prr(SEXP FSEXP, SEXP PSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    rcpp_result_gen = Rcpp::wrap(prr(F, P));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aprr
-Rcpp::IntegerMatrix aprr(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P);
-RcppExport SEXP _voteR_aprr(SEXP FSEXP, SEXP PSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    rcpp_result_gen = Rcpp::wrap(aprr(F, P));
-    return rcpp_result_gen;
-END_RCPP
-}
-// borda
-Rcpp::IntegerMatrix borda(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P);
-RcppExport SEXP _voteR_borda(SEXP FSEXP, SEXP PSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    rcpp_result_gen = Rcpp::wrap(borda(F, P));
-    return rcpp_result_gen;
-END_RCPP
-}
-// avg_w_gate
-double avg_w_gate(IntegerMatrix X, IntegerVector G);
-RcppExport SEXP _voteR_avg_w_gate(SEXP XSEXP, SEXP GSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type X(XSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type G(GSEXP);
-    rcpp_result_gen = Rcpp::wrap(avg_w_gate(X, G));
-    return rcpp_result_gen;
-END_RCPP
-}
-// nborda
-Rcpp::IntegerMatrix nborda(IntegerVector F, IntegerMatrix P, IntegerVector G);
-RcppExport SEXP _voteR_nborda(SEXP FSEXP, SEXP PSEXP, SEXP GSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type G(GSEXP);
-    rcpp_result_gen = Rcpp::wrap(nborda(F, P, G));
-    return rcpp_result_gen;
-END_RCPP
-}
-// nanson
-Rcpp::IntegerMatrix nanson(Rcpp::IntegerVector F, Rcpp::IntegerMatrix perm);
-RcppExport SEXP _voteR_nanson(SEXP FSEXP, SEXP permSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type perm(permSEXP);
-    rcpp_result_gen = Rcpp::wrap(nanson(F, perm));
-    return rcpp_result_gen;
-END_RCPP
-}
-// hplurality
-Rcpp::IntegerVector hplurality(IntegerVector F, IntegerMatrix P);
-RcppExport SEXP _voteR_hplurality(SEXP FSEXP, SEXP PSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    rcpp_result_gen = Rcpp::wrap(hplurality(F, P));
-    return rcpp_result_gen;
-END_RCPP
-}
-// move_bottom
-Rcpp::IntegerMatrix move_bottom(IntegerMatrix P, int a);
-RcppExport SEXP _voteR_move_bottom(SEXP PSEXP, SEXP aSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    rcpp_result_gen = Rcpp::wrap(move_bottom(P, a));
-    return rcpp_result_gen;
-END_RCPP
-}
-// second_smallest
-int second_smallest(IntegerVector x);
-RcppExport SEXP _voteR_second_smallest(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(second_smallest(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// hare
-Rcpp::IntegerMatrix hare(Rcpp::IntegerVector F, Rcpp::IntegerMatrix perm);
-RcppExport SEXP _voteR_hare(SEXP FSEXP, SEXP permSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type perm(permSEXP);
-    rcpp_result_gen = Rcpp::wrap(hare(F, perm));
-    return rcpp_result_gen;
-END_RCPP
-}
-// head_to_head
-int head_to_head(IntegerVector F, IntegerMatrix P, int x, int y);
-RcppExport SEXP _voteR_head_to_head(SEXP FSEXP, SEXP PSEXP, SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< int >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(head_to_head(F, P, x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pair_maj_rule
-Rcpp::IntegerMatrix pair_maj_rule(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P);
-RcppExport SEXP _voteR_pair_maj_rule(SEXP FSEXP, SEXP PSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    rcpp_result_gen = Rcpp::wrap(pair_maj_rule(F, P));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rowSumsC
-IntegerVector rowSumsC(IntegerMatrix x);
-RcppExport SEXP _voteR_rowSumsC(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rowSumsC(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// copeland
-Rcpp::IntegerMatrix copeland(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P);
-RcppExport SEXP _voteR_copeland(SEXP FSEXP, SEXP PSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    rcpp_result_gen = Rcpp::wrap(copeland(F, P));
-    return rcpp_result_gen;
-END_RCPP
-}
-// head_to_headB
-Rcpp::List head_to_headB(IntegerVector F, IntegerMatrix P, int x, int y);
-RcppExport SEXP _voteR_head_to_headB(SEXP FSEXP, SEXP PSEXP, SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< int >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(head_to_headB(F, P, x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
-// schulze
-Rcpp::IntegerMatrix schulze(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P);
-RcppExport SEXP _voteR_schulze(SEXP FSEXP, SEXP PSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    rcpp_result_gen = Rcpp::wrap(schulze(F, P));
-    return rcpp_result_gen;
-END_RCPP
-}
-// vote
-Rcpp::IntegerMatrix vote(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P, int v);
-RcppExport SEXP _voteR_vote(SEXP FSEXP, SEXP PSEXP, SEXP vSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< int >::type v(vSEXP);
-    rcpp_result_gen = Rcpp::wrap(vote(F, P, v));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pareto_eval
-int pareto_eval(Rcpp::IntegerVector F, Rcpp::IntegerMatrix P, Rcpp::IntegerMatrix soc);
-RcppExport SEXP _voteR_pareto_eval(SEXP FSEXP, SEXP PSEXP, SEXP socSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type P(PSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type soc(socSEXP);
-    rcpp_result_gen = Rcpp::wrap(pareto_eval(F, P, soc));
-    return rcpp_result_gen;
-END_RCPP
-}
-// transitivity_eval
-int transitivity_eval(Rcpp::IntegerMatrix soc);
-RcppExport SEXP _voteR_transitivity_eval(SEXP socSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type soc(socSEXP);
-    rcpp_result_gen = Rcpp::wrap(transitivity_eval(soc));
-    return rcpp_result_gen;
-END_RCPP
-}
-// iia_switch
-Rcpp::IntegerMatrix iia_switch(IntegerMatrix perm, int a, int s);
-RcppExport SEXP _voteR_iia_switch(SEXP permSEXP, SEXP aSEXP, SEXP sSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type perm(permSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    Rcpp::traits::input_parameter< int >::type s(sSEXP);
-    rcpp_result_gen = Rcpp::wrap(iia_switch(perm, a, s));
-    return rcpp_result_gen;
-END_RCPP
-}
-// iia_switch_bl
-Rcpp::IntegerMatrix iia_switch_bl(IntegerMatrix perm, int a, int bl, int s);
-RcppExport SEXP _voteR_iia_switch_bl(SEXP permSEXP, SEXP aSEXP, SEXP blSEXP, SEXP sSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type perm(permSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    Rcpp::traits::input_parameter< int >::type bl(blSEXP);
-    Rcpp::traits::input_parameter< int >::type s(sSEXP);
-    rcpp_result_gen = Rcpp::wrap(iia_switch_bl(perm, a, bl, s));
-    return rcpp_result_gen;
-END_RCPP
-}
-// iia_compare
-int iia_compare(IntegerMatrix soc1, IntegerMatrix soc2, int x, int y);
-RcppExport SEXP _voteR_iia_compare(SEXP soc1SEXP, SEXP soc2SEXP, SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type soc1(soc1SEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type soc2(soc2SEXP);
-    Rcpp::traits::input_parameter< int >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(iia_compare(soc1, soc2, x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
-// iia
-int iia(IntegerVector F, IntegerMatrix perm, IntegerMatrix socP, int voteRule);
-RcppExport SEXP _voteR_iia(SEXP FSEXP, SEXP permSEXP, SEXP socPSEXP, SEXP voteRuleSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type F(FSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type perm(permSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type socP(socPSEXP);
-    Rcpp::traits::input_parameter< int >::type voteRule(voteRuleSEXP);
-    rcpp_result_gen = Rcpp::wrap(iia(F, perm, socP, voteRule));
-    return rcpp_result_gen;
-END_RCPP
-}
-// iterate
-Rcpp::List iterate(IntegerMatrix perm, int N, int T, int dt, NumericVector V);
-RcppExport SEXP _voteR_iterate(SEXP permSEXP, SEXP NSEXP, SEXP TSEXP, SEXP dtSEXP, SEXP VSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type perm(permSEXP);
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< int >::type T(TSEXP);
-    Rcpp::traits::input_parameter< int >::type dt(dtSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type V(VSEXP);
-    rcpp_result_gen = Rcpp::wrap(iterate(perm, N, T, dt, V));
-    return rcpp_result_gen;
-END_RCPP
-}
 // minkowskiDistancePairOfPoints
 long double minkowskiDistancePairOfPoints(NumericVector idealVector, NumericVector altVector, double orderScalar, NumericVector salienceVector);
 static SEXP _voteR_minkowskiDistancePairOfPoints_try(SEXP idealVectorSEXP, SEXP altVectorSEXP, SEXP orderScalarSEXP, SEXP salienceVectorSEXP) {
@@ -534,6 +211,10 @@ RcppExport SEXP _voteR_minkowskiDistancePairOfPoints(SEXP idealVectorSEXP, SEXP 
     if (rcpp_isInterrupt_gen) {
         UNPROTECT(1);
         Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
     }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
@@ -568,6 +249,10 @@ RcppExport SEXP _voteR_minkowskiDistanceSets(SEXP idealsMatrixSEXP, SEXP altsMat
         UNPROTECT(1);
         Rf_onintr();
     }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
@@ -601,6 +286,10 @@ RcppExport SEXP _voteR_minkowskiUtilitySets(SEXP idealsMatrixSEXP, SEXP altsMatr
     if (rcpp_isInterrupt_gen) {
         UNPROTECT(1);
         Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
     }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
@@ -647,6 +336,10 @@ RcppExport SEXP _voteR_sgn(SEXP aScalarSEXP) {
         UNPROTECT(1);
         Rf_onintr();
     }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
@@ -679,6 +372,10 @@ RcppExport SEXP _voteR_superElipseRadius(SEXP idealPointSEXP, SEXP altPointSEXP,
     if (rcpp_isInterrupt_gen) {
         UNPROTECT(1);
         Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
     }
     Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
     if (rcpp_isError_gen) {
@@ -730,33 +427,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_voteR_isInICFromPointAndIC", (DL_FUNC) &_voteR_isInICFromPointAndIC, 2},
     {"_voteR_isInParetoSetFromPointAndIdeals", (DL_FUNC) &_voteR_isInParetoSetFromPointAndIdeals, 2},
     {"_voteR_isInParetoSetFromPointAndPS", (DL_FUNC) &_voteR_isInParetoSetFromPointAndPS, 2},
-    {"_voteR_icc", (DL_FUNC) &_voteR_icc, 2},
-    {"_voteR_iac", (DL_FUNC) &_voteR_iac, 2},
-    {"_voteR_weighted_pref", (DL_FUNC) &_voteR_weighted_pref, 3},
-    {"_voteR_prr", (DL_FUNC) &_voteR_prr, 2},
-    {"_voteR_aprr", (DL_FUNC) &_voteR_aprr, 2},
-    {"_voteR_borda", (DL_FUNC) &_voteR_borda, 2},
-    {"_voteR_avg_w_gate", (DL_FUNC) &_voteR_avg_w_gate, 2},
-    {"_voteR_nborda", (DL_FUNC) &_voteR_nborda, 3},
-    {"_voteR_nanson", (DL_FUNC) &_voteR_nanson, 2},
-    {"_voteR_hplurality", (DL_FUNC) &_voteR_hplurality, 2},
-    {"_voteR_move_bottom", (DL_FUNC) &_voteR_move_bottom, 2},
-    {"_voteR_second_smallest", (DL_FUNC) &_voteR_second_smallest, 1},
-    {"_voteR_hare", (DL_FUNC) &_voteR_hare, 2},
-    {"_voteR_head_to_head", (DL_FUNC) &_voteR_head_to_head, 4},
-    {"_voteR_pair_maj_rule", (DL_FUNC) &_voteR_pair_maj_rule, 2},
-    {"_voteR_rowSumsC", (DL_FUNC) &_voteR_rowSumsC, 1},
-    {"_voteR_copeland", (DL_FUNC) &_voteR_copeland, 2},
-    {"_voteR_head_to_headB", (DL_FUNC) &_voteR_head_to_headB, 4},
-    {"_voteR_schulze", (DL_FUNC) &_voteR_schulze, 2},
-    {"_voteR_vote", (DL_FUNC) &_voteR_vote, 3},
-    {"_voteR_pareto_eval", (DL_FUNC) &_voteR_pareto_eval, 3},
-    {"_voteR_transitivity_eval", (DL_FUNC) &_voteR_transitivity_eval, 1},
-    {"_voteR_iia_switch", (DL_FUNC) &_voteR_iia_switch, 3},
-    {"_voteR_iia_switch_bl", (DL_FUNC) &_voteR_iia_switch_bl, 4},
-    {"_voteR_iia_compare", (DL_FUNC) &_voteR_iia_compare, 4},
-    {"_voteR_iia", (DL_FUNC) &_voteR_iia, 4},
-    {"_voteR_iterate", (DL_FUNC) &_voteR_iterate, 5},
     {"_voteR_minkowskiDistancePairOfPoints", (DL_FUNC) &_voteR_minkowskiDistancePairOfPoints, 4},
     {"_voteR_minkowskiDistanceSets", (DL_FUNC) &_voteR_minkowskiDistanceSets, 4},
     {"_voteR_minkowskiUtilitySets", (DL_FUNC) &_voteR_minkowskiUtilitySets, 5},

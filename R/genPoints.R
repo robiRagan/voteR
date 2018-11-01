@@ -21,7 +21,7 @@
 #'   commands rxxxx (see ?distributions). The user should specify the
 #'   distribution as a string using the standard R abreviation for the
 #'   distribution (see ?distributions for a list). Currently supported are: "norm",
-#'   "unif", "binom", "cauchy", "chisq", "weibull"
+#'   "unif", "beta", "cauchy", "chisq", "weibull"
 #' @param distributionParametersGenPoints A vector that contains the additional
 #'   parameters needed by the particular rxxxx function for a distribtuion. (see
 #'   ?rxxxx where xxxx is a function listed under ?distribution). Example for a
@@ -34,16 +34,20 @@
 #' @examples
 #'   genPoints(numberOfDimensionsGenPoints = 2, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "norm", distributionParametersGenPoints = c(0,.2), dimOneBoundsGenPoints = c(0,1), dimTwoBoundsGenPoints = c(-1,1))
 #'   
-#'   betaPoints <- genPoints(numberOfDimensionsGenPoints = 2, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "beta", distributionParametersGenPoints = c(.1,.1), dimOneBoundsGenPoints = c(0,1), dimTwoBoundsGenPoints = c(0,1))
+#'   genPoints(numberOfDimensionsGenPoints = 2, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "beta", distributionParametersGenPoints = c(.1,.1), dimOneBoundsGenPoints = c(0,1), dimTwoBoundsGenPoints = c(0,1))
 #'   
 #'   genPoints(numberOfDimensionsGenPoints = 1, numberOfPointsGenPoints = 100, distributionTypeGenPoints = "unif", distributionParametersGenPoints = c(-1,1))
+#'   
+#'   
+#'   
 #' @export
-# numberOfDimensionsGenPoints <- numDimsGlobal
-# numberOfPointsGenPoints <- numCompetitors
-# distributionTypeGenPoints <- "uniform"
-# distributionParametersGenPoints <- c(.1,.1)
-# dimOneBoundsGenPoints <- c(0,1)
-# dimTwoBoundsGenPoints <- c(0,1)
+# numberOfDimensionsGenPoints <- 2              ## FOR TESTING
+# numberOfPointsGenPoints <- 100                ## FOR TESTING
+# distributionTypeGenPoints <- "beta"          ## FOR TESTING
+# distributionParametersGenPoints <- c(.1,.1)   ## FOR TESTING
+# dimOneBoundsGenPoints <- c(0,1)               ## FOR TESTING
+# dimTwoBoundsGenPoints <- c(0,1)               ## FOR TESTING
+
 genPoints <- function(numberOfDimensionsGenPoints=1, numberOfPointsGenPoints=100, distributionTypeGenPoints ="unif", dimOneBoundsGenPoints = c(-Inf,Inf), dimTwoBoundsGenPoints = c(-Inf,Inf), distributionParametersGenPoints = c(-1,1)){
 
     if(numberOfDimensionsGenPoints==1){

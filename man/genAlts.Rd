@@ -9,8 +9,9 @@ Generates one or more one or two dimensional alternatives from one of given set 
 it is a wrapper for \code{\link{genPoints}}.}
 \usage{
 genAlts(numberOfDimensionsGenAlts = 1, numberOfAltsGenAlts = 5,
-  distributionTypeGenAlts = "unif", distributionParametersGenAlts = c(-1,
-  1), dimOneBoundsGenAlts = c(-Inf, Inf), dimTwoBoundsGenAlts = c(-Inf,
+  distributionTypeGenAlts = "unif",
+  distributionParametersGenAlts = c(-1, 1),
+  dimOneBoundsGenAlts = c(-Inf, Inf), dimTwoBoundsGenAlts = c(-Inf,
   Inf))
 }
 \arguments{

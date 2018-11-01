@@ -71,3 +71,5 @@ Other utility functions: \code{\link{minkowskiDistancePairOfPoints}},
   \code{\link{minkowskiUtilitySets}},
   \code{\link{prefOrderMinko}}
 }
+\concept{minkowski}
+\concept{utility functions}

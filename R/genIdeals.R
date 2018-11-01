@@ -11,7 +11,7 @@
 #'   commands rxxxx (see ?distributions). The user should specify the
 #'   distribution as a string using the standard R abreviation for the
 #'   distribution (see ?distributions for a list). Currently supported are: "norm",
-#'   "unif", "binom", "cauchy", "chisq", "weibull"
+#'   "unif", "beta", "cauchy", "chisq", "weibull"
 #' @param distributionParametersGenIdeals A vector that contains the additional
 #'   parameters needed by the particular rxxxx function for a distribtuion. (see
 #'   ?rxxxx where xxxx is a function listed under ?distribution). Example for a
@@ -24,7 +24,10 @@
 #' @examples
 #'   genIdeals(numberOfDimensionsGenIdeals=1, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="norm", distributionParametersGenIdeals = c(0,.5), dimOneBoundsGenIdeals = c(0,Inf), dimTwoBoundsGenIdeals = c(-Inf,0))
 #'   
-#'   genIdeals(numberOfDimensionsGenIdeals=1, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="unif", distributionParametersGenIdeals = c(-1,1), dimOneBoundsGenIdeals = c(-Inf,Inf), dimTwoBoundsGenIdeals = c(-Inf,Inf)
+#'   genIdeals(numberOfDimensionsGenIdeals=2, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="unif", distributionParametersGenIdeals = c(-1,1), dimOneBoundsGenIdeals = c(-Inf,Inf), dimTwoBoundsGenIdeals = c(-Inf,Inf) )
+#'   
+#'  genIdeals(numberOfDimensionsGenIdeals=2, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="beta", distributionParametersGenIdeals = c(.1,1), dimOneBoundsGenIdeals = c(-Inf,Inf), dimTwoBoundsGenIdeals = c(-Inf,Inf) )
+#'   
 #' @export
 genIdeals <- function(numberOfDimensionsGenIdeals=1, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="unif", distributionParametersGenIdeals = c(-1,1), dimOneBoundsGenIdeals = c(-Inf,Inf), dimTwoBoundsGenIdeals = c(-Inf,Inf)){
     genPoints(numberOfDimensionsGenPoints = numberOfDimensionsGenIdeals, numberOfPointsGenPoints = numberOfIdealsGenIdeals, distributionTypeGenPoints = distributionTypeGenIdeals, distributionParametersGenPoints = distributionParametersGenIdeals, dimOneBoundsGenPoints = dimOneBoundsGenIdeals, dimTwoBoundsGenPoints = dimTwoBoundsGenIdeals)

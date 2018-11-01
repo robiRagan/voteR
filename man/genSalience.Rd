@@ -5,7 +5,8 @@
 \title{genSalience}
 \usage{
 genSalience(numVotersGenSalience, numDimsGenSalience,
-  salienceHeterogeneityGenSalience = 1, maxRelativeSalienceGenSalience = 2)
+  salienceHeterogeneityGenSalience = 1,
+  maxRelativeSalienceGenSalience = 2)
 }
 \arguments{
 \item{numVotersGenSalience}{scalar Number of voters}

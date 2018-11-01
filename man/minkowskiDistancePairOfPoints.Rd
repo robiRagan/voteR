@@ -55,3 +55,5 @@ Other utility functions: \code{\link{minkowskiDistanceSets}},
   \code{\link{minkowskiUtilitySets}},
   \code{\link{prefOrderMinko}}
 }
+\concept{minkowski}
+\concept{utility functions}

@@ -11,8 +11,8 @@ a salience weighting matrix using \code{\link{genSalience}}, a Minkowsi Order nu
 These ideal point, salience weights, minkowski distance order and loss function order can be used
 by \code{\link{minkoUtilitySets}} to calulate utility and find indifference curves.}
 \usage{
-genVoters(numberOfDimensionsGenVoters = 1, numberOfVotersGenVoters = 15,
-  distributionTypeGenVoters = "unif",
+genVoters(numberOfDimensionsGenVoters = 1,
+  numberOfVotersGenVoters = 15, distributionTypeGenVoters = "unif",
   distributionParametersGenVoters = c(-1, 1),
   dimOneBoundsGenVoters = c(-Inf, Inf), dimTwoBoundsGenVoters = c(-Inf,
   Inf), salienceHeterogeneityGenVoters = 1,

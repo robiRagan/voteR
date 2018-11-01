@@ -11,8 +11,8 @@ competitorsAdapt(competitorDataFrameCompetitorAdapts,
   seatAllocationForCompetitorsNewCompetitorAdapts,
   seatAllocationForCompetitorsOldCompetitorAdapts,
   electoralFormulaCompetitorAdapts,
-  scaledCompetitorAdaptStepSizeCompetitorAdapts, dimOneBoundsCompetitorsAdapt,
-  dimTwoBoundsCompetitorsAdapt)
+  scaledCompetitorAdaptStepSizeCompetitorAdapts,
+  dimOneBoundsCompetitorsAdapt, dimTwoBoundsCompetitorsAdapt)
 }
 \arguments{
 \item{competitorDataFrameCompetitorAdapts}{a voteR dataFrame that contains the competitorID, current location, and comeptitor type for each competitor.}

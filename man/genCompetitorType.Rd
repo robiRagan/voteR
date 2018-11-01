@@ -5,8 +5,9 @@
 \title{genCompetitorType
 Assigns each competitor a type based upon parameters provided by the user.}
 \usage{
-genCompetitorType(numCompetitorsGenCompType, allHunterGenCompType = FALSE,
-  probabilityHunterGenCompType = 1, probabilityAggregatorGenCompType = 0,
+genCompetitorType(numCompetitorsGenCompType,
+  allHunterGenCompType = FALSE, probabilityHunterGenCompType = 1,
+  probabilityAggregatorGenCompType = 0,
   probabilityPredatorGenCompType = 0)
 }
 \arguments{

@@ -73,3 +73,5 @@ Other utility functions: \code{\link{minkowskiDistancePairOfPoints}},
   \code{\link{minkowskiDistanceSets}},
   \code{\link{minkowskiUtilitySets}}
 }
+\concept{minkowski}
+\concept{utility functions}

@@ -8,8 +8,8 @@ Generates ideal points for a set of voters.
 Generates one or two dimensional ideal points from one of given set of distributions, from calibrated data, or from a user provided distribution. 
 it is a wrapper for \code{\link{genPoints}} and is itself further wrapped by \code{\link{genVoters}}.}
 \usage{
-genIdeals(numberOfDimensionsGenIdeals = 1, numberOfIdealsGenIdeals = 100,
-  distributionTypeGenIdeals = "unif",
+genIdeals(numberOfDimensionsGenIdeals = 1,
+  numberOfIdealsGenIdeals = 100, distributionTypeGenIdeals = "unif",
   distributionParametersGenIdeals = c(-1, 1),
   dimOneBoundsGenIdeals = c(-Inf, Inf), dimTwoBoundsGenIdeals = c(-Inf,
   Inf))
@@ -24,7 +24,7 @@ the ideal points from. Uses the base R random number generation family of
 commands rxxxx (see ?distributions). The user should specify the
 distribution as a string using the standard R abreviation for the
 distribution (see ?distributions for a list). Currently supported are: "norm",
-"unif", "binom", "cauchy", "chisq", "weibull"}
+"unif", "beta", "cauchy", "chisq", "weibull"}
 
 \item{distributionParametersGenIdeals}{A vector that contains the additional
 parameters needed by the particular rxxxx function for a distribtuion. (see
@@ -50,5 +50,8 @@ it is a wrapper for \code{\link{genPoints}} and is itself further wrapped by \co
 \examples{
   genIdeals(numberOfDimensionsGenIdeals=1, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="norm", distributionParametersGenIdeals = c(0,.5), dimOneBoundsGenIdeals = c(0,Inf), dimTwoBoundsGenIdeals = c(-Inf,0))
   
-  genIdeals(numberOfDimensionsGenIdeals=1, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="unif", distributionParametersGenIdeals = c(-1,1), dimOneBoundsGenIdeals = c(-Inf,Inf), dimTwoBoundsGenIdeals = c(-Inf,Inf)
+  genIdeals(numberOfDimensionsGenIdeals=2, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="unif", distributionParametersGenIdeals = c(-1,1), dimOneBoundsGenIdeals = c(-Inf,Inf), dimTwoBoundsGenIdeals = c(-Inf,Inf) )
+  
+ genIdeals(numberOfDimensionsGenIdeals=2, numberOfIdealsGenIdeals=100, distributionTypeGenIdeals ="beta", distributionParametersGenIdeals = c(.1,1), dimOneBoundsGenIdeals = c(-Inf,Inf), dimTwoBoundsGenIdeals = c(-Inf,Inf) )
+  
 }

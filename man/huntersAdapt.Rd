@@ -9,9 +9,9 @@ huntersAdapt(competitorDataFrameHunterAdapts,
   voteTotalsForCompetitorsOldHunterAdapts,
   voteTotalsForCompetitorsNewHunterAdapts,
   seatAllocationForCompetitorsNewHunterAdapts,
-  seatAllocationForCompetitorsOldHunterAdapts, electoralFormulaHunterAdapts,
-  scaledCompetitorAdaptStepSizeHunterAdapts, dimOneBoundsHuntersAdapt,
-  dimTwoBoundsHuntersAdapt)
+  seatAllocationForCompetitorsOldHunterAdapts,
+  electoralFormulaHunterAdapts, scaledCompetitorAdaptStepSizeHunterAdapts,
+  dimOneBoundsHuntersAdapt, dimTwoBoundsHuntersAdapt)
 }
 \arguments{
 \item{competitorDataFrameHunterAdapts}{a voteR dataFrame that contains the competitorID, current location, and comeptitor type for each competitor.}

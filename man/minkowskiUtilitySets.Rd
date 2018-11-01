@@ -83,3 +83,5 @@ Other utility functions: \code{\link{minkowskiDistancePairOfPoints}},
   \code{\link{minkowskiDistanceSets}},
   \code{\link{prefOrderMinko}}
 }
+\concept{minkowski}
+\concept{utility functions}
