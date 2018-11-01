@@ -32,6 +32,8 @@ Collate:
     'genCompetitorType.R'
     'genCompetitors.R'
     'genCompetitorHeading.R'
+    'genInitialStatusQuos.R'
+    'genRandomProposals.R'
     'setAlts.R'
     'setCompetitors.R'
     'RcppExports.R'
@@ -54,6 +56,7 @@ Collate:
     'distToMargMed.R'
 Suggests:
     testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 SystemRequirements: 
     C++11
+Encoding: UTF-8
