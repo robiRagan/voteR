@@ -3,7 +3,7 @@
 #' 
 #' @param votersDataFrame The voters data frame must have a specific format, and it must be an R data.frame object. There must be at least these 6 variables and they must have the following names. The order of the variables in the data.frame is not important as long as the variables have the proper names.
 #' 
-#'  voterID: A numeric identifier unique to the voter.
+#'  ID: A numeric identifier unique to the voter.
 #'  xIdeal: The x coordinate of the voter's ideal point.
 #'  yIdeal: The y coordinate of the voter's ideal point.
 #'  minkoOrder: The Minkowski order of the voters MInkowski metric based utility function. = 1, is City Block. = 2 is Euclidian and 100 = is  See ?Minkowski. 
@@ -68,26 +68,26 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
 # ## TEST ##
 
     
-    # ## TEST ###
-    # votersDataFrame<-voterIdeals
-    # altPoints<-as.matrix(NA)
-    # competitorPoints <- currentCompetitorPositions
-    # plotIdeals <- TRUE
-    # plotPareto <- FALSE
-    # plotICs <- FALSE
-    # locationForICs<-NA
-    # plotAlts <- FALSE
-    # plotCompetitors <- TRUE
-    # plotVoronoi <- TRUE
-    # plotMarginalMedian <- TRUE
-    # precision<-.01
-    # yToXRatio <- 1
-    # showLegend <- TRUE
-    # showLegendBy <- "pointTypes"
-    # xBounds <- dimOneBounds
-    # yBounds <- dimTwoBounds
-    # ## TEST ##
-    
+  # ## TEST Using devVoteRScript_SEA18.R ###
+  # votersDataFrame <- voterIdeals
+  # altPoints=as.matrix(NA)
+  # competitorPoints <- currentCompetitorPositions 
+  # plotIdeals <- TRUE
+  # plotPareto <- FALSE
+  # plotICs <- FALSE
+  # locationForICs <- NA
+  # plotAlts <- FALSE
+  # plotCompetitors <- TRUE 
+  # plotVoronoi <- TRUE 
+  # plotMarginalMedian <- TRUE
+  # precision <- .01 
+  # yToXRatio <-  1 
+  # showLegend <- TRUE 
+  # showLegendBy <- "pointTypes"
+  # xBounds <- dimOneBounds 
+  # yBounds <- dimTwoBounds 
+  # ## TEST Using devVoteRScript_SEA18.R ###
+
     
     
     
@@ -137,18 +137,18 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
         allVotersICPointsList <- list()
         
         for (j in 1:nrow(votersDataFrame)){
-            allVotersICPointsList[[j]] <- findICPoints(voterID = votersDataFrame$voterID[j], idealPoint = c(votersDataFrame$xIdeal[j], votersDataFrame$yIdeal[j]), orderScalar = votersDataFrame$minkoOrder[j], salienceVector = c(votersDataFrame$xSalience[j], votersDataFrame$ySalience[j]), altPoint = locationForICs, precision = .01)
+            allVotersICPointsList[[j]] <- findICPoints(voterID = votersDataFrame$ID[j], idealPoint = c(votersDataFrame$xLocation[j], votersDataFrame$yLocation[j]), orderScalar = votersDataFrame$minkoOrder[j], salienceVector = c(votersDataFrame$xSalience[j], votersDataFrame$ySalience[j]), altPoint = locationForICs, precision = .01)
         }
         
         # Collapse the list to a data frame. 
         allVotersPrefToSetsDF <- do.call(rbind.data.frame, allVotersICPointsList)
         
         # Name the dataframe variables. I swear to god this "colnames() <-"  thing is witchcraft. 
-        colnames(allVotersPrefToSetsDF) <- c('voterID', 'xCoords', 'yCoords')
+        colnames(allVotersPrefToSetsDF) <- c('ID', 'xCoords', 'yCoords')
         
-        allVotersPrefToSetsDF$voterID <- as.factor(allVotersPrefToSetsDF$voterID)
+        allVotersPrefToSetsDF$ID <- as.factor(allVotersPrefToSetsDF$ID)
         
-        voteplot <- voteplot + geom_polygon(data = allVotersPrefToSetsDF, mapping = aes(color = voterID, fill = voterID, x = xCoords, y = yCoords), alpha = 1/(2*nrow(competitorPoints)))
+        voteplot <- voteplot + geom_polygon(data = allVotersPrefToSetsDF, mapping = aes(color = ID, fill = ID, x = xCoords, y = yCoords), alpha = 1/(2*nrow(competitorPoints)))
         
     }
     
@@ -156,7 +156,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
     
     if ( plotPareto == TRUE){
         
-        justIdealPoints = cbind(votersDataFrame$xIdeal, votersDataFrame$yIdeal)
+        justIdealPoints = cbind(votersDataFrame$xLocation, votersDataFrame$yLocation)
         
         paretoSetDF <- findParetoSet(justIdealPoints)
         
@@ -174,9 +174,9 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
         if((is.na(altPoints[1,1])==FALSE)){dataFrameForVoronoi <- altPoints}
         
             if(as.character(xBounds[1])==FALSE | as.character(yBounds[1])==FALSE){
-                calcVoronoi <- suppressMessages( deldir(dataFrameForVoronoi$xLocation, dataFrameForVoronoi$yLocation) )
+                calcVoronoi <- suppressMessages( deldir::deldir(dataFrameForVoronoi$xLocation, dataFrameForVoronoi$yLocation) )
             } else {
-                calcVoronoi <- suppressMessages( deldir(dataFrameForVoronoi$xLocation, dataFrameForVoronoi$yLocation, rw=c(xBounds[1], xBounds[2], yBounds[1], yBounds[2])) )
+                calcVoronoi <- suppressMessages( deldir::deldir(dataFrameForVoronoi$xLocation, dataFrameForVoronoi$yLocation, rw=c(xBounds[1], xBounds[2], yBounds[1], yBounds[2])) )
             }
         #Now we can make a plot
         voteplot <- voteplot + geom_segment(data = calcVoronoi$dirsgs, mapping = aes( x = x1, y = y1, xend = x2, yend = y2, linetype=""), color="gray", size=1)
@@ -191,17 +191,17 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
     
     ## Now plot the ideal points for the voters ##
     
-     if ( plotIdeals == TRUE){
+     if ( plotIdeals == TRUE ){
          
-         votersDataFrame$voterID <- as.factor(votersDataFrame$voterID)
+         votersDataFrame$ID <- as.factor(votersDataFrame$ID)
          
-         voteplot <- voteplot + geom_point(data = votersDataFrame, mapping = aes(shape=pointType, color = voterID, x = xIdeal, y = yIdeal), size = 3) # + scale_shape(labels = "A Voter")
+         voteplot <- voteplot + geom_point(data = votersDataFrame, mapping = aes(shape=pointType, color = ID, x = xLocation, y = yLocation), size = 3) # + scale_shape(labels = "A Voter")
      }
      
     
     if ( plotMarginalMedian == TRUE){
         
-        marginalMedian <- data.frame( xMedian=median(votersDataFrame$xIdeal), yMedian=median(votersDataFrame$yIdeal), pointType="marginal median" )
+        marginalMedian <- data.frame( xMedian=median(votersDataFrame$xLocation), yMedian=median(votersDataFrame$yLocation), pointType="marginal median" )
         
         voteplot <- voteplot + geom_point(data = marginalMedian, mapping = aes(shape=pointType, x = xMedian, y = yMedian), size = 3) # + scale_shape(labels = "A Voter")
     }
@@ -217,7 +217,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
     ## Now plot the competitors ##
     
     if ( plotCompetitors == TRUE){
-        voteplot <- voteplot + geom_point(data = competitorPoints, mapping = aes(shape=pointType, x = xLocation, y = yLocation), size = 4) + geom_text(data = competitorPoints, mapping = aes(x = xLocation, y = yLocation, label=competitorID), hjust=0, vjust=1.75)# + scale_shape(labels = "A Competitor")
+        voteplot <- voteplot + geom_point(data = competitorPoints, mapping = aes(shape=pointType, x = xLocation, y = yLocation), size = 4) + geom_text(data = competitorPoints, mapping = aes(x = xLocation, y = yLocation, label=ID), hjust=0, vjust=1.75)# + scale_shape(labels = "A Competitor")
     }
     
     

@@ -22,7 +22,6 @@
 #'   parameters needed by the particular rxxxx function for a distribtuion. (see
 #'   ?rxxxx where xxxx is a function listed under ?distribution). Example for a
 #'   Normal(0,1), use: c(0,1).
-#' @param numDimsGenVoters scalar Number of policy dimensions. Can be 1 or 2. If this is set to 1, then the salience of that one dimension will be 1 for all voters. 
 #' @param dimOneBoundsGenVoters A vector that contains the starting and ending poitns of t
 #' he first dimension. Example: c(0,1). Defaults to c(-Inf, Inf) if no boundary is provided. 
 #' @param dimTwoBoundsGenVoters A vector that contains the starting and ending poitns of t
@@ -83,17 +82,17 @@ genVoters <- function(numberOfDimensionsGenVoters=1, numberOfVotersGenVoters=15,
     
     #6) Create voterIDs
     
-    voterID = paste( "V",seq(from = 1,to = numberOfVotersGenVoters), sep="-" )
+    ID <- paste( "V",seq(from = 1,to = numberOfVotersGenVoters), sep="-" )
     
     
     #7) Store Everything in a Data Frame 
     
     if(numberOfDimensionsGenVoters==1){
-        outVoterDataFrame <- data.frame(pointType, voterID, xIdeal=tempIdeals[ ,1], minkoOrder=tempMinkoOrder, xSalience = tempSalience[ ,1], lossOrder = tempLossOrder )    
+        outVoterDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1], minkoOrder=tempMinkoOrder, xSalience = tempSalience[ ,1], lossOrder = tempLossOrder )    
     }
         
     if(numberOfDimensionsGenVoters==2){
-outVoterDataFrame <- data.frame(pointType, voterID, xIdeal=tempIdeals[ ,1], yIdeal=tempIdeals[ ,2], minkoOrder=tempMinkoOrder, xSalience = tempSalience[ ,1], ySalience = tempSalience[ ,2],  lossOrder = tempLossOrder)    
+outVoterDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1], yLocation=tempIdeals[ ,2], minkoOrder=tempMinkoOrder, xSalience = tempSalience[ ,1], ySalience = tempSalience[ ,2],  lossOrder = tempLossOrder)    
     }
     
 

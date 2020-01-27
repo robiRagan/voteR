@@ -64,8 +64,6 @@ he first dimension. Example: c(0,1). Defaults to c(-Inf, Inf)  if no boundary is
 \item{probabilityQuadraticGenVoters}{scalar [0,1] The probability that any given voter will have Manhattan/Diamond (Minkowski Order = 1) indifference curves.}
 
 \item{probabilityCubicGenVoters}{scalar [0,1] The probability that any given voter will have Chebyshev/Square (Minkowski Order = 100) indifference curves.}
-
-\item{numDimsGenVoters}{scalar Number of policy dimensions. Can be 1 or 2. If this is set to 1, then the salience of that one dimension will be 1 for all voters.}
 }
 \value{
 outVotersDataFrame data.frame The voters data frame will have the following format.

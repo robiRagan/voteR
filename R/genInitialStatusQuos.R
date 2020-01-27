@@ -48,16 +48,22 @@ genInitialStatusQuos <- function(numberOfDimensionsGenInitialStatusQuos=2, numbe
     
     # 2) Create statusQuoIDs
     
-    statusQuoID = paste( "SQ",seq(from = 1,to = numberOfInitialStatusQuosGenInitialStatusQuos), sep="-" )
+    ID = paste( "SQ",seq(from = 1,to = numberOfInitialStatusQuosGenInitialStatusQuos), sep="-" )
     
-    #3) Store Everything in a Data Frame 
+    #3) Create a vector of the pointType called "competitor"
+    
+    pointType <- rep("statusQuo", numberOfInitialStatusQuosGenInitialStatusQuos)
+    
+    
+    
+    #4) Store Everything in a Data Frame 
     
     if(numberOfDimensionsGenInitialStatusQuos==1){
-      outInitialIdealsDataFrame <- data.frame(statusQuoID, xCoord=tempIdeals[ ,1] )    
+      outInitialIdealsDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1] )    
     }
         
     if(numberOfDimensionsGenInitialStatusQuos==2){
-    outInitialIdealsDataFrame <- data.frame(statusQuoID, xCoord=tempIdeals[ ,1], yCoord=tempIdeals[ ,2] )    
+    outInitialIdealsDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1], yLocation=tempIdeals[ ,2] )    
     }
     
     

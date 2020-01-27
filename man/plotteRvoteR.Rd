@@ -16,7 +16,7 @@ plotteRvoteR(votersDataFrame = NA, altPoints = as.matrix(NA),
 \arguments{
 \item{votersDataFrame}{The voters data frame must have a specific format, and it must be an R data.frame object. There must be at least these 6 variables and they must have the following names. The order of the variables in the data.frame is not important as long as the variables have the proper names.
 
- voterID: A numeric identifier unique to the voter.
+ ID: A numeric identifier unique to the voter.
  xIdeal: The x coordinate of the voter's ideal point.
  yIdeal: The y coordinate of the voter's ideal point.
  minkoOrder: The Minkowski order of the voters MInkowski metric based utility function. = 1, is City Block. = 2 is Euclidian and 100 = is  See ?Minkowski. 

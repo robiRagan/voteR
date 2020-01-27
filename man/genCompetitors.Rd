@@ -65,5 +65,4 @@ a vote seekign strategy using \code{\link{genStrategy}}.
 \examples{
   genCompetitors(numberOfDimensionsGenCompetitors=1, numberOfCompetitorsGenCompetitors=10, distributionTypeGenCompetitors ="unif", distributionParametersGenCompetitors = c(-1,1), dimOneBoundsGenCompetitors = c(-Inf,Inf), dimTwoBoundsGenCompetitors = c(-Inf,Inf), allHunterGenCompetitors = TRUE, probabilityHunterGenCompetitors = 0, probabilityAggregatorGenCompetitors=0, probabilityPredatorGenCompetitors=0)
  
-  genCompetitors(numberOfDimensionsGenCompetitors=1, numberOfCompetitorsGenCompetitors=100, distributionTypeGenCompetitors ="unif", distributionParametersGenCompetitors = c(0,1), salienceHeterogeneityGenCompetitors=1, maxRelativeSalienceGenCompetitors=2)
 }

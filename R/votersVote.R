@@ -11,45 +11,56 @@
 #' @export
 votersVote <- function(voterDataFrameVotersVote = NA, altsDataFrameVotersVote = NA, abstentionThresholdVotersVote, numVotesPerVoterVotersVote, cumulationParameterVotersVote){
 
-   #  ## FOR TESTING ##
+   #  ## FOR TESTING In ISOLATION ##
    #  voterDataFrameVotersVote <- genVoters(numberOfDimensionsGenVoters = 2, dimOneBoundsGenVoters = c(0,1), dimTwoBoundsGenVoters = c(0,1), distributionTypeGenVoters = "unif")
    #  altsDataFrameVotersVote <- genCompetitors(numberOfDimensionsGenCompetitors = 2, dimOneBoundsGenCompetitors = c(0,1), dimTwoBoundsGenCompetitors = c(0,1), distributionTypeGenCompetitors = "unif", numberOfCompetitorsGenCompetitors = 5)
    #  abstentionThresholdVotersVote <- 2
    #  numVotesPerVoterVotersVote <- 3
    # cumulationParameterVotersVote <- 2
    #
-   #  ## FOR TESTING ##
+   #  ## FOR TESTING IN ISOLATION ##
     
-    ## For TESTING ##
-    # voterDataFrameVotersVote <- voterIdeals
-    # altsDataFrameVotersVote <- currentCompetitorPositions
-    # numVotesPerVoterVotersVote <- numVotesPerVoter
-    # cumulationParameterVotersVote <- cumulationParameter
-    # abstentionThresholdVotersVote <- 1
-    ## For Testing ##
+  
+  #
+  # #  ## FOR TESTING with devVoteScript_SEA18 ##
+  # voterDataFrameVotersVote <-  voterIdeals
+  # altsDataFrameVotersVote <- currentCompetitorPositions
+  # abstentionThresholdVotersVote <- abstentionThreshold
+  # numVotesPerVoterVotersVote <- 3
+  # cumulationParameterVotersVote <- cumulationParameter
+  # #  ## FOR TESTING with devVoteScript_SEA18 ##
+  
+  
+  # #  ## FOR TESTING with devVoteScript_ParetoProperties ##
+  # voterDataFrameVotersVote <-  voterIdeals
+  # altsDataFrameVotersVote <- altsForThisRound
+  # abstentionThresholdVotersVote <- abstentionThreshold
+  # numVotesPerVoterVotersVote <- numVotesPerVoter
+  # cumulationParameterVotersVote <- cumulationParameter
+  # #  ## FOR TESTING with devVoteScript_ParetoProperties ##
     
     
     
     # First determine the number of issue dimensions in the voterDataFrameVotersVote  and altsDataFrameVotersVote
     # If they are not the samme issue an error.
     
-    voterDimensions <- ifelse("xIdeal" %in% colnames(voterDataFrameVotersVote) & "yIdeal" %in% colnames(voterDataFrameVotersVote), 2, 1)
+    voterDimensions <- ifelse("xLocation" %in% colnames(voterDataFrameVotersVote) & "yLocation" %in% colnames(voterDataFrameVotersVote), 2, 1)
     altDimensions <- ifelse("xLocation" %in% colnames(altsDataFrameVotersVote) & "yLocation" %in% colnames(altsDataFrameVotersVote), 2, 1)
     
-    if(voterDimensions!= altDimensions){ stop('The number of dimensions supplied with voterDataFrameVotersVote is ',voterDimensions, '.\n The number of dimensions supplied with altsDataFrameVotersVote is ', altDimensions, 'Voter idela points and the location of the competitors/alternatives in the choice set must have the same dimensionality.')}
+    if(voterDimensions!= altDimensions){ stop('The number of dimensions supplied with voterDataFrameVotersVote is ',voterDimensions, '.\n The number of dimensions supplied with altsDataFrameVotersVote is ', altDimensions, '.\n Voter ideal points and the location of the competitors/alternatives under consideration must have the same dimensionality.')}
     
                 ###################
                 # COMPUTE UTILITY
                 ####################
     # Compute the voter's utility for the competitors/alternatives
 
-    votersUtilsForAltsVotersVote <- minkowskiUtilitySets(idealsMatrix = cbind(voterDataFrameVotersVote$xIdeal,voterDataFrameVotersVote$yIdeal), altsMatrix = cbind(altsDataFrameVotersVote$xLocation, altsDataFrameVotersVote$yLocation), minkoOrderVector = voterDataFrameVotersVote$minkoOrder, lossOrderVector = voterDataFrameVotersVote$lossOrder, salienceMatrix = cbind(voterDataFrameVotersVote$xSalience, voterDataFrameVotersVote$ySalience))
+    votersUtilsForAltsVotersVote <- minkowskiUtilitySets(idealsMatrix = cbind(voterDataFrameVotersVote$xLocation, voterDataFrameVotersVote$yLocation), altsMatrix = cbind(altsDataFrameVotersVote$xLocation, altsDataFrameVotersVote$yLocation), minkoOrderVector = voterDataFrameVotersVote$minkoOrder, lossOrderVector = voterDataFrameVotersVote$lossOrder, salienceMatrix = cbind(voterDataFrameVotersVote$xSalience, voterDataFrameVotersVote$ySalience))
     
     #Add the VoterIDs as the rownames
-    row.names(votersUtilsForAltsVotersVote) <- voterDataFrameVotersVote$voterID
+    row.names(votersUtilsForAltsVotersVote) <- voterDataFrameVotersVote$ID
     
     ## TESTING
-    #votersDistancesToCompetitorsVotersVote <- minkowskiDistanceSets(idealsMatrix = cbind(voterDataFrameVotersVote$xIdeal,voterDataFrameVotersVote$yIdeal), altsMatrix = cbind(altsDataFrameVotersVote$xLocation, altsDataFrameVotersVote$yLocation), minkoOrderVector = voterDataFrameVotersVote$minkoOrder, salienceMatrix = cbind(voterDataFrameVotersVote$xSalience, voterDataFrameVotersVote$ySalience)) 
+    #votersDistancesToCompetitorsVotersVote <- minkowskiDistanceSets(idealsMatrix = cbind(voterDataFrameVotersVote$xLocation,voterDataFrameVotersVote$yLocation), altsMatrix = cbind(altsDataFrameVotersVote$xLocation, altsDataFrameVotersVote$yLocation), minkoOrderVector = voterDataFrameVotersVote$minkoOrder, salienceMatrix = cbind(voterDataFrameVotersVote$xSalience, voterDataFrameVotersVote$ySalience)) 
     
     
             ##############################
@@ -64,9 +75,12 @@ votersVote <- function(voterDataFrameVotersVote = NA, altsDataFrameVotersVote = 
     votersUtilsForAltsVotersVote <- ifelse(votersUtilsForAltsVotersVote < abstentionThresholdUtilsVotersVote, -Inf, votersUtilsForAltsVotersVote)
     
     # Remove any voters who want to fully abstain because all alternatives give them -Inf utility.
-    votersUtilsForAltsVotersVote <- votersUtilsForAltsVotersVote[apply(X=votersUtilsForAltsVotersVote, MARGIN=1, FUN=max)!=-Inf, ]
+          # First determine if any of the rows contain all -Inf
+          rowHasAllNegInfUtil <- matrix(apply(X=votersUtilsForAltsVotersVote, MARGIN=1, FUN=max)==-Inf, byrow = TRUE)
     
-    
+          votersUtilsForAltsVotersVote <- votersUtilsForAltsVotersVote[!rowHasAllNegInfUtil, ]
+
+
         ## If at least one voter wants to vote continue with the voting. 
         ## If no one wants to vote jump to the else{}
         if(nrow(votersUtilsForAltsVotersVote)>=1){    # STARTS THE VOTING IF AT LEAST ONE PERSON WANTS TO VOTE
@@ -75,15 +89,15 @@ votersVote <- function(voterDataFrameVotersVote = NA, altsDataFrameVotersVote = 
     ####################################
     # ALLOCATE nu VOTES for EACH VOTER
     ###################################
-            if(cumulationParameterVotersVote==0){  # First cases where cumulation is not allowed
+              if(cumulationParameterVotersVote==0){  # First cases where cumulation is not allowed
         
                 votersVoteFor <- voteByUtilNoCumu(votersUtilsForAltsVoteByUtilNoCumu = votersUtilsForAltsVotersVote, numVotesPerVoterVoteByUtilNoCumu = numVotesPerVoterVotersVote)
 
-            } else {  # Now for cases where cumulation is allowed
+              } else {  # Now for cases where cumulation is allowed
         
                 votersVoteFor <- voteByUtilCumu(votersUtilsForAltsVoteByUtilCumu = votersUtilsForAltsVotersVote, numVotesPerVoterVoteByUtilCumu = numVotesPerVoterVotersVote)  
         
-            } # ends the else for cases where voters can cumulate
+              } # ends the else for cases where voters can cumulate
     
         
         } else { # What about cases where no one votes
@@ -95,7 +109,7 @@ votersVote <- function(voterDataFrameVotersVote = NA, altsDataFrameVotersVote = 
     
     outVoteTotals <- data.frame(votersVoteFor)
     
-    names(outVoteTotals) <- altsDataFrameVotersVote$competitorID
+    names(outVoteTotals) <- altsDataFrameVotersVote$ID
     
     outVoteTotals
     }   

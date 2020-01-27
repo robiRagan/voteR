@@ -37,7 +37,6 @@
 #' @examples
 #'   genCompetitors(numberOfDimensionsGenCompetitors=1, numberOfCompetitorsGenCompetitors=10, distributionTypeGenCompetitors ="unif", distributionParametersGenCompetitors = c(-1,1), dimOneBoundsGenCompetitors = c(-Inf,Inf), dimTwoBoundsGenCompetitors = c(-Inf,Inf), allHunterGenCompetitors = TRUE, probabilityHunterGenCompetitors = 0, probabilityAggregatorGenCompetitors=0, probabilityPredatorGenCompetitors=0)
 #'  
-#'   genCompetitors(numberOfDimensionsGenCompetitors=1, numberOfCompetitorsGenCompetitors=100, distributionTypeGenCompetitors ="unif", distributionParametersGenCompetitors = c(0,1), salienceHeterogeneityGenCompetitors=1, maxRelativeSalienceGenCompetitors=2)
 #' @export
 # numberOfDimensionsGenCompetitors=2
 # numberOfCompetitorsGenCompetitors=10
@@ -64,7 +63,7 @@ genCompetitors <- function(numberOfDimensionsGenCompetitors=1, numberOfCompetito
     
     #4) Create CompetitorIDs
     
-    competitorID = paste( "C",seq(from = 1,to = numberOfCompetitorsGenCompetitors), sep="-" )
+    ID = paste( "C",seq(from = 1,to = numberOfCompetitorsGenCompetitors), sep="-" )
     
     #5) Create the competitors direction. This is not used by all party types but is generated for all.
     
@@ -73,16 +72,13 @@ genCompetitors <- function(numberOfDimensionsGenCompetitors=1, numberOfCompetito
     #6) Store Everything in a Data Frame 
     
     if(numberOfDimensionsGenCompetitors==1){
-        outCompetitorDataFrame <- data.frame(pointType, competitorID, xIdeal=tempIdeals[ ,1], competitorType, headingRadians)    
+        outCompetitorDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1], competitorType, headingRadians)    
     }
         
     if(numberOfDimensionsGenCompetitors==2){
-    outCompetitorDataFrame <- data.frame(pointType, competitorID, xLocation=tempIdeals[ ,1], yLocation=tempIdeals[ ,2], competitorType, headingRadians)    
+    outCompetitorDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1], yLocation=tempIdeals[ ,2], competitorType, headingRadians)    
     }
     
-    # Rename the x and y coordinates to xLocation and yLocation
-    # names(outCompetitorDataFrame)[names(outCompetitorDataFrame) == 'xIdeal'] <- 'xCompetitor'
-    # names(outCompetitorDataFrame)[names(outCompetitorDataFrame) == 'yIdeal'] <- 'yCompetitor'
     
     outCompetitorDataFrame
 

@@ -10,25 +10,27 @@
 #' @export
 voteByUtilNoCumu <- function(votersUtilsForAltsVoteByUtilNoCumu, numVotesPerVoterVoteByUtilNoCumu){
     
-    ## TESTING ##
+    ## TESTING 1 ##
     # testVotersDataFrame <- voterIdeals
     # testAltsDataFrame <- currentCompetitorPositions
     # numVotesPerVoterVoteByUtilNoCumu <- numVotesPerVoter
     # testAbstentionThreshold <- 1
     # 
-    # 
     # votersUtilsForAltsVoteByUtilNoCumu <- minkowskiUtilitySets(idealsMatrix = cbind(testVotersDataFrame$xIdeal,testVotersDataFrame$yIdeal), altsMatrix = cbind(testAltsDataFrame$xLocation, testAltsDataFrame$yLocation), minkoOrderVector = testVotersDataFrame$minkoOrder, lossOrderVector = testVotersDataFrame$lossOrder, salienceMatrix = cbind(testVotersDataFrame$xSalience, testVotersDataFrame$ySalience))
     # 
     # row.names(votersUtilsForAltsVoteByUtilNoCumu) <- testVotersDataFrame$voterID
-    # 
     # testAbstentionThresholdUtils <- -(testAbstentionThreshold^testVotersDataFrame$lossOrder[1])
-    # 
     # votersUtilsForAltsVoteByUtilNoCumu <- ifelse(votersUtilsForAltsVoteByUtilNoCumu < testAbstentionThresholdUtils, -Inf, votersUtilsForAltsVoteByUtilNoCumu)
     # votersUtilsForAltsVoteByUtilNoCumu <- votersUtilsForAltsVoteByUtilNoCumu[apply(X=votersUtilsForAltsVoteByUtilNoCumu, MARGIN=1, FUN=max)!=-Inf, ]
-
+    ## TESTING 1 ##
     
-    ## TESTING ##
-    
+  # #  ## FOR TESTING with devVoteScript_SEA18
+  # #  and votersVote() ##
+  # votersUtilsForAltsVoteByUtilNoCumu <- votersUtilsForAltsVotersVote
+  # numVotesPerVoterVoteByUtilNoCumu <- numVotesPerVoter
+  # #  ## FOR TESTING with devVoteScript_SEA18 ##
+  
+  
     ######################################
     # Replace -Inf with NA
     ######################################
@@ -39,14 +41,14 @@ voteByUtilNoCumu <- function(votersUtilsForAltsVoteByUtilNoCumu, numVotesPerVote
     ###############################################
     # Find large to small rank for each alternative
     ###############################################
-    rankOrderOfAltsLargeToSmall <- t(apply(X = -votersUtilsForAltsVoteByUtilNoCumu, MARGIN = 1, FUN = rank, na.last="keep"))
+    rankOrderOfAltsLargeToSmallNoCumu <- t(apply(X = -votersUtilsForAltsVoteByUtilNoCumu, MARGIN = 1, FUN = rank, na.last="keep"))
     
     ############################################################################
     # Voter cast votes for all alts from 1 to numVotesPerVoterVoteByUtilNoCumu
     ############################################################################
-    votersVotesForAltsMatrix <- ifelse(rankOrderOfAltsLargeToSmall <= numVotesPerVoterVoteByUtilNoCumu, 1, 0)
+    votersVotesForAltsMatrixNoCumu <- ifelse(rankOrderOfAltsLargeToSmallNoCumu <= numVotesPerVoterVoteByUtilNoCumu, 1, 0)
     
-    outVotesVoteByUtilNoCumu <- matrix(colSums(votersVotesForAltsMatrix, na.rm = TRUE), nrow = 1)
+    outVotesVoteByUtilNoCumu <- matrix(colSums(votersVotesForAltsMatrixNoCumu, na.rm = TRUE), nrow = 1)
     
     colnames(outVotesVoteByUtilNoCumu) <- seq(1:ncol(votersUtilsForAltsVoteByUtilNoCumu))
     

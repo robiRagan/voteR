@@ -13,13 +13,13 @@
 #' @export
 voteByUtilCumu <- function(votersUtilsForAltsVoteByUtilCumu, numVotesPerVoterVoteByUtilCumu){
     
-    ## TESTING ##
+    # ## TESTING 1 ##
     # testVotersDataFrame <- genVoters(numberOfDimensionsGenVoters = 2, dimOneBoundsGenVoters = c(0,1), dimTwoBoundsGenVoters = c(0,1), distributionTypeGenVoters = "unif")
     # 
     # testAltsDataFrame <- genCompetitors(numberOfDimensionsGenCompetitors = 2, dimOneBoundsGenCompetitors = c(0,1), dimTwoBoundsGenCompetitors = c(0,1), distributionTypeGenCompetitors = "unif", numberOfCompetitorsGenCompetitors = 7)
     # 
     # 
-    # votersUtilsForAltsVoteByUtilCumu <- minkowskiUtilitySets(idealsMatrix = cbind(testVotersDataFrame$xIdeal,testVotersDataFrame$yIdeal), altsMatrix = cbind(testAltsDataFrame$xLocation, testAltsDataFrame$yLocation), minkoOrderVector = testVotersDataFrame$minkoOrder, lossOrderVector = testVotersDataFrame$lossOrder, salienceMatrix = cbind(testVotersDataFrame$xSalience, testVotersDataFrame$ySalience))
+    # votersUtilsForAltsVoteByUtilCumu <- minkowskiUtilitySets(idealsMatrix = cbind(testVotersDataFrame$xLocation,testVotersDataFrame$yLocation), altsMatrix = cbind(testAltsDataFrame$xLocation, testAltsDataFrame$yLocation), minkoOrderVector = testVotersDataFrame$minkoOrder, lossOrderVector = testVotersDataFrame$lossOrder, salienceMatrix = cbind(testVotersDataFrame$xSalience, testVotersDataFrame$ySalience))
     # 
     # row.names(votersUtilsForAltsVoteByUtilCumu) <- testVotersDataFrame$voterID
     # testAbstentionThreshold <- 1
@@ -27,9 +27,16 @@ voteByUtilCumu <- function(votersUtilsForAltsVoteByUtilCumu, numVotesPerVoterVot
     # 
     # votersUtilsForAltsVoteByUtilCumu <- ifelse(votersUtilsForAltsVoteByUtilCumu < testAbstentionThresholdUtils, -Inf, votersUtilsForAltsVoteByUtilCumu)
     # votersUtilsForAltsVoteByUtilCumu <- votersUtilsForAltsVoteByUtilCumu[apply(X=votersUtilsForAltsVoteByUtilCumu, MARGIN=1, FUN=max)!=-Inf, ]
-    # votersUtilsForAltsVoteByUtilCumu <- votersUtilsForAltsVotersVote
     # numVotesPerVoterVoteByUtilCumu <- 15
-    ## TESTING ##
+    # # TESTING 1 ##
+    
+  # #  ## FOR TESTING with devVoteScript_SEA18
+  # #  and votersVote() ##
+  #   votersUtilsForAltsVoteByUtilCumu <- votersUtilsForAltsVotersVote
+  #   numVotesPerVoterVoteByUtilCumu <- numVotesPerVoter
+  #   #  ## FOR TESTING with devVoteScript_SEA18
+    # 
+
     
     ######################################
     # Replace -Inf with NA
@@ -42,9 +49,22 @@ voteByUtilCumu <- function(votersUtilsForAltsVoteByUtilCumu, numVotesPerVoterVot
     # For each voter, find the ratio of utility for an alternative, to their utility for
     # all alternaitves/competitors above thier abstention threshold. 
     ##################################################################################################
-    utilityForAllAlts <- rowSums(votersUtilsForAltsVoteByUtilCumu, na.rm=TRUE)
     
-    proportionOfUtilityByAlt <- votersUtilsForAltsVoteByUtilCumu/utilityForAllAlts
+    # Before calculating the proportions convert the utility values from negative to positive.
+        # I do this by normalizing the utility each voter has for the least preferred alternative
+        # that they are still willing to vote for to 1. 
+      
+      # Find the lowest utility each voter experiences for an alternative they are still willing to vote for, 
+     lowestVotingUtilityForEachVoter <- apply(X = votersUtilsForAltsVoteByUtilCumu, MARGIN = 1, FUN = min, na.rm = TRUE)
+    
+    # Determine the ammount to add to all the voter's utility ammounts in order to normalize the minimum voting utility to 1 
+    normalizationValueForEachVoter <- 1 + abs(lowestVotingUtilityForEachVoter)
+    
+    normalizedUtilityForAltsByUtil <- votersUtilsForAltsVoteByUtilCumu + normalizationValueForEachVoter
+    
+    normalizedUtilityForAllAlts <- rowSums(normalizedUtilityForAltsByUtil, na.rm=TRUE)
+    
+    proportionOfUtilityByAlt <- normalizedUtilityForAltsByUtil/normalizedUtilityForAllAlts
     
     ###################################################################################################
     # Now mutiply the utility proportions by the total number of votes each voter has
@@ -57,9 +77,9 @@ voteByUtilCumu <- function(votersUtilsForAltsVoteByUtilCumu, numVotesPerVoterVot
     # raw votes to integers
     ######################################################################
     
-    votersVotesForAltsMatrix <- t( apply(X = rawVotesPerAlt, MARGIN = 1, FUN = roundPreserveSum) )
+    votersVotesForAltsMatrixCumu <- t( apply(X = rawVotesPerAlt, MARGIN = 1, FUN = roundPreserveSum) )
     
-    outVotesVoteByUtilCumu <- matrix( colSums(votersVotesForAltsMatrix,na.rm = TRUE), nrow=1)
+    outVotesVoteByUtilCumu <- matrix( colSums(votersVotesForAltsMatrixCumu,na.rm = TRUE), nrow=1)
     
     colnames(outVotesVoteByUtilCumu) <- seq(1:ncol(votersUtilsForAltsVoteByUtilCumu))
     

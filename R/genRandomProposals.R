@@ -24,9 +24,8 @@
 #' @return outRandomProposalsDataFrame data.frame The RandomProposals data frame will have the following format.
 #' 
 #'  proposalID: A numeric identifier unique to the voter.
-#'  xCoord: The x coordinate of the voter's ideal point.
-#'  yCoord: The y coordinate of the voter's ideal point.
-#'  minkoOrder: The Minkowski order of the voters MInkowski metric based utility function. = 1, is City Block. = 2 is Euclidian and 100 = is  See ?Minkowski. 
+#'  xLocation: The x coordinate of the voter's ideal point.
+#'  yLocation: The y coordinate of the voter's ideal point.
 #' @examples
 #'   genRandomProposals(numberOfDimensionsGenRandomProposals=1, numberOfRandomProposalsGenRandomProposals=10, distributionTypeGenRandomProposals ="unif", distributionParametersGenRandomProposals = c(-1,1), dimOneBoundsGenRandomProposals = c(-Inf,Inf), dimTwoBoundsGenRandomProposals = c(-Inf,Inf) ) 
 #'  
@@ -34,36 +33,46 @@
 #'   
 #'  genRandomProposals(numberOfDimensionsGenRandomProposals=2, numberOfRandomProposalsGenRandomProposals=10, distributionTypeGenRandomProposals ="beta", distributionParametersGenRandomProposals = c(.1,1), dimOneBoundsGenRandomProposals = c(0,1), dimTwoBoundsGenRandomProposals = c(0,1) ) 
 #' @export
-# numberOfDimensionsGenRandomProposals=2
-# numberOfRandomProposalsGenRandomProposals=10
-# distributionTypeGenRandomProposals ="unif"
-# distributionParametersGenRandomProposals = c(-1,1)
-# dimOneBoundsGenRandomProposals = c(-Inf,Inf)
-# dimTwoBoundsGenRandomProposals = c(-Inf,Inf)
 genRandomProposals <- function(numberOfDimensionsGenRandomProposals=2, numberOfRandomProposalsGenRandomProposals=3, distributionTypeGenRandomProposals ="unif", distributionParametersGenRandomProposals = c(-1,1), dimOneBoundsGenRandomProposals = c(-Inf,Inf), dimTwoBoundsGenRandomProposals = c(-Inf,Inf) ){
 
+  ## FOR TESTING ##
+  # numberOfDimensionsGenRandomProposals=2
+  # numberOfRandomProposalsGenRandomProposals=1
+  # distributionTypeGenRandomProposals ="unif"
+  # distributionParametersGenRandomProposals = c(-1,1)
+  # dimOneBoundsGenRandomProposals = c(-Inf,Inf)
+  # dimTwoBoundsGenRandomProposals = c(-Inf,Inf)
+  
+  
+  
     # 1) Generate Ideals
     tempIdeals <- genIdeals(numberOfDimensionsGenIdeals = numberOfDimensionsGenRandomProposals, numberOfIdealsGenIdeals = numberOfRandomProposalsGenRandomProposals, distributionTypeGenIdeals = distributionTypeGenRandomProposals, distributionParametersGenIdeals = distributionParametersGenRandomProposals, dimOneBoundsGenIdeals = dimOneBoundsGenRandomProposals, dimTwoBoundsGenIdeals = dimTwoBoundsGenRandomProposals)
     
     
     #2) Create proposalIDs
     
-    proposalID = paste( "P",seq(from = 1,to = numberOfRandomProposalsGenRandomProposals), sep="-" )
+    ID = paste( "P",seq(from = 1,to = numberOfRandomProposalsGenRandomProposals), sep="-" )
     
     
-    #3) Store Everything in a Data Frame 
+    #3) Create a vector of the pointType called "competitor"
+    
+    pointType <- rep("proposal", numberOfRandomProposalsGenRandomProposals)
+    
+    
+    
+    #4) Store Everything in a Data Frame 
     
     if(numberOfDimensionsGenRandomProposals==1){
-        outRandomProposalsDataFrame <- data.frame(proposalID, xCoord=tempIdeals[ ,1] )    
+        outRandomProposalsDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1] )    
     }
         
     if(numberOfDimensionsGenRandomProposals==2){
-    outRandomProposalsDataFrame <- data.frame(proposalID, xLocation=tempIdeals[ ,1], yLocation=tempIdeals[ ,2] )    
+    outRandomProposalsDataFrame <- data.frame(pointType, ID, xLocation=tempIdeals[ ,1], yLocation=tempIdeals[ ,2] )    
     }
     
-    # Rename the x and y coordinates to xLocation and yLocation
-    # names(outCompetitorDataFrame)[names(outCompetitorDataFrame) == 'xCoord'] <- 'xCompetitor'
-    # names(outCompetitorDataFrame)[names(outCompetitorDataFrame) == 'yCoord'] <- 'yCompetitor'
+    # For some reason when there is only one proposal the rowname for the output dataframe gets renamed.
+        # This removes that name so the output dataframe for one proposal looks like the output for multiple proposals 
+    rownames(outRandomProposalsDataFrame) <- NULL
     
     outRandomProposalsDataFrame
 

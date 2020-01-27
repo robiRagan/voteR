@@ -39,9 +39,8 @@ he first dimension. Example: c(0,1). Defaults to c(-Inf, Inf)  if no boundary is
 outRandomProposalsDataFrame data.frame The RandomProposals data frame will have the following format.
 
  proposalID: A numeric identifier unique to the voter.
- xCoord: The x coordinate of the voter's ideal point.
- yCoord: The y coordinate of the voter's ideal point.
- minkoOrder: The Minkowski order of the voters MInkowski metric based utility function. = 1, is City Block. = 2 is Euclidian and 100 = is  See ?Minkowski.
+ xLocation: The x coordinate of the voter's ideal point.
+ yLocation: The y coordinate of the voter's ideal point.
 }
 \description{
 Generates a set of Random proposals to face the status quo. 
