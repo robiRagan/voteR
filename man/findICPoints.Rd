@@ -4,8 +4,14 @@
 \alias{findICPoints}
 \title{findICPoints}
 \usage{
-findICPoints(voterID, idealPoint, altPointVector, orderScalar,
-  salienceVector, precision = 0.01)
+findICPoints(
+  voterID,
+  idealPoint,
+  altPointVector,
+  orderScalar,
+  salienceVector,
+  precision = 0.01
+)
 }
 \arguments{
 \item{idealPoint}{An ideal point for a voter.}

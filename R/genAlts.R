@@ -38,7 +38,7 @@ genAlts <- function(numberOfDimensionsGenAlts=1, numberOfAltsGenAlts=5, distribu
     
     #4 Create alternativeIDs
     
-    alternativeID = paste( "A",seq(from = 1,to = numberOfAltsGenAlts), sep="-" )
+    ID = paste( "A",seq(from = 1,to = numberOfAltsGenAlts), sep="-" )
     
 
     #4) Store Everything in a Data Frame 
@@ -48,7 +48,7 @@ genAlts <- function(numberOfDimensionsGenAlts=1, numberOfAltsGenAlts=5, distribu
     }
     
     if(numberOfDimensionsGenAlts==2){
-        outAlternativeDataFrame <- data.frame(pointType, alternativeID, xLocation=tempPoints[ ,1], yLocation=tempPoints[ ,2])    
+        outAlternativeDataFrame <- data.frame(pointType, ID, xLocation=tempPoints[ ,1], yLocation=tempPoints[ ,2])    
     }
     
     # # Rename the x and y coordinates to xLocation and yLocation

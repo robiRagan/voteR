@@ -12,8 +12,10 @@ their numVotes of votes accoording to those ratios. Rounding to whole votes is a
 "last integer method" with the function \code{\link{roundPreserveSum}}. See ?roundPreserveSum for more details. 
 This function is usually not called directly but is wrapped by  \code{\link{votersVote}}.}
 \usage{
-voteByUtilCumu(votersUtilsForAltsVoteByUtilCumu,
-  numVotesPerVoterVoteByUtilCumu)
+voteByUtilCumu(
+  votersUtilsForAltsVoteByUtilCumu,
+  numVotesPerVoterVoteByUtilCumu
+)
 }
 \arguments{
 \item{votersUtilsForAltsVoteByUtilCumu}{numVoters by numAlts matrix of utility values.}

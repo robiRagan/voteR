@@ -3,7 +3,6 @@
 \docType{package}
 \name{voteR}
 \alias{voteR}
-\alias{voteR-package}
 \title{Tools for creating social choice models.}
 \description{
 This package lets a researcher create, explore and analyze different social choice models. There are four main components of the package are generating voters, spatial voting models, voting rules and modeling tools.

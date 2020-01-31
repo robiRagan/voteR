@@ -5,13 +5,25 @@
 \title{plotteRvoteR
 Main plotting command for the voteR package.}
 \usage{
-plotteRvoteR(votersDataFrame = NA, altPoints = as.matrix(NA),
-  competitorPoints = as.matrix(NA), plotIdeals = FALSE,
-  plotPareto = FALSE, plotICs = FALSE, locationForICs = NA,
-  plotAlts = FALSE, plotCompetitors = FALSE, plotVoronoi = FALSE,
-  plotMarginalMedian = FALSE, precision = 0.01, yToXRatio = 1,
-  showLegend = TRUE, showLegendBy = "pointTypes", xBounds = FALSE,
-  yBounds = FALSE)
+plotteRvoteR(
+  votersDataFrame = NA,
+  altPoints = as.matrix(NA),
+  competitorPoints = as.matrix(NA),
+  plotIdeals = FALSE,
+  plotPareto = FALSE,
+  plotICs = FALSE,
+  locationForICs = NA,
+  plotAlts = FALSE,
+  plotCompetitors = FALSE,
+  plotVoronoi = FALSE,
+  plotMarginalMedian = FALSE,
+  precision = 0.01,
+  yToXRatio = 1,
+  showLegend = TRUE,
+  showLegendBy = "pointTypes",
+  xBounds = FALSE,
+  yBounds = FALSE
+)
 }
 \arguments{
 \item{votersDataFrame}{The voters data frame must have a specific format, and it must be an R data.frame object. There must be at least these 6 variables and they must have the following names. The order of the variables in the data.frame is not important as long as the variables have the proper names.
@@ -45,15 +57,13 @@ plotteRvoteR(votersDataFrame = NA, altPoints = as.matrix(NA),
 
 \item{yToXRatio}{Fixes the ratio of the two axis for plotting purposes. The number of units on the policy space represented on the y-axis that is equivalent to one unit on policy space represented on the the x-axis. Default: yToXRatio = 1. For more see ?coord_fixed().}
 
-\item{showLegend}{Should the legend for the plot be shown. If TRUE then ggplot() uses defaults to plot Default: showLegend = FALSE}
+\item{showLegend}{Show the legend by one of the following: "pointTypes" Default: "pointTypes"}
 
 \item{xBounds}{The bounds for the x dimension provided as a vector. Ex: c(-1,1). If they are not provided then ggplot() will use its defaults. Default = FALSE}
 
 \item{yBounds}{The bounds for the x dimension. Ex: c(-1,1). If they are not provided then ggplot() will use its defaults. Default = FALSE}
 
 \item{percision}{How precisely you want to trace out the voters' indifference curves. The lower the number the more accurate and smooth the indifference curve will be, but for large numbers of voters larger numbers will slow down plotting. Default: precision = .01}
-
-\item{showLegend}{Show the legend by one of the following: "pointTypes" Default: "pointTypes"}
 }
 \value{
 Plots the requested attributes of a spatial voting model.

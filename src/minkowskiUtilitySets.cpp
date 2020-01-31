@@ -60,7 +60,7 @@ using namespace Rcpp;
 //'   a quadratic loss function and their disutility is the square of the minkowski distance.
 //'   This has the effect of causing utility to fall slowly at first as they evaluate alternatives
 //'   closer to their ideal, but then once an alternative is sufficently far away utility falls much
-//'   faster than in teh quadratic case. 
+//'   faster than in the linear case. 
 //'   
 //' @return utilMatrix A numVoters x numAlts matrix that contains the Minkowski
 //'   Utility between each voter and each alternative, given a voter's salience, 

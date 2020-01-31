@@ -6,12 +6,14 @@
 Generates a set of inital status quos for all of the "runs" of the model. 
  This allows for a comparision of how the policies develop across the different electoral systems}
 \usage{
-genInitialStatusQuos(numberOfDimensionsGenInitialStatusQuos = 2,
+genInitialStatusQuos(
+  numberOfDimensionsGenInitialStatusQuos = 2,
   numberOfInitialStatusQuosGenInitialStatusQuos = 3,
   distributionTypeGenInitialStatusQuos = "unif",
   distributionParametersGenInitialStatusQuos = c(-1, 1),
   dimOneBoundsGenInitialStatusQuos = c(-Inf, Inf),
-  dimTwoBoundsGenInitialStatusQuos = c(-Inf, Inf))
+  dimTwoBoundsGenInitialStatusQuos = c(-Inf, Inf)
+)
 }
 \arguments{
 \item{numberOfDimensionsGenInitialStatusQuos}{scalar Number of policy dimensions. Can be 1 or 2.}

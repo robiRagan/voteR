@@ -17,47 +17,14 @@ Depends:
 Imports:
     Rcpp (>= 0.11.4),
     ggplot2 (>= 1.0.0),
+    dplyr (>= 0.8.3),
     truncdist(>= 1.0),
     deldir(>= 0.1-14)
 LinkingTo: Rcpp, BH
 NeedsCompilation: yes
-Collate:
-    'genIdeals.R'
-    'genAlts.R'
-    'genPoints.R'
-    'genVoters.R'  
-    'genSalience.R'
-    'genMinkoOrder.R'
-    'genLossOrder.R'
-    'genCompetitorType.R'
-    'genCompetitors.R'
-    'genCompetitorHeading.R'
-    'genInitialStatusQuos.R'
-    'genRandomProposals.R'
-    'genSincereProposals.R'
-    'setAlts.R'
-    'setCompetitors.R'
-    'RcppExports.R'
-    'voteR-package.R'
-    'ggParetoSet.R'
-    'plotIC.R'
-    'plotParetoSet.R'
-    'plotteRvoteR.R'
-    'findICsForSetOfVoters.R'
-    'competitorsAdapt.R'
-    'huntersAdapt.R'
-    'votersVote.R'
-    'voteByUtilNoCumu.R'
-    'voteByUtilCumu.R'
-    'roundPreserveSum.R'
-    'voronoiTessellation.R'
-    'allocateSeats.R'
-    'moveDistDAtAngleT.R'
-    'hunterNewHeading.R'
-    'distToMargMed.R'
 Suggests:
     testthat
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 SystemRequirements: 
     C++11
 Encoding: UTF-8

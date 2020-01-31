@@ -19,23 +19,35 @@
 #' @export
 plotIC <- function(votersDataFramePlotIC, altPointPlotIC, precisionPlotIC){
     
+    
+    # ### FOR TESTING ###
+    # votersDataFramePlotIC <- data.frame(pointType = rep(x = "voter", 3), ID = c("V-1", "V-2", "V-3"), xLocation=c(-1/8, 7/8, 4/8), yLocation=c(3/8, 4/8, -3/8), minkoOrder=c(1, 2, 100), xSalience = c(1, 1, 1), ySalience = c(1, 1, 1), lossOrder = c(1, 2, 1) )
+    # altPointPlotIC <- c(1/8,1/8)
+    # precisionPlotIC <- .01
+    # 
+    # ### FOR TESTING ###
+    # 
+    
     allVotersICPointsList <- findICsForSetOfVoters(votersDataFrame = votersDataFramePlotIC, altPoint = altPointPlotIC, precision = precisionPlotIC) 
     
     allVotersPrefToSetsDF <- do.call(rbind.data.frame, allVotersICPointsList)
     
     allVotersPrefToSetsDF$voterID <- as.factor(allVotersPrefToSetsDF$voterID)
     
-    idealPoints <- data.frame(voterID = votersDataFramePlotIC$voterID, xIdeal=votersDataFramePlotIC$xIdeal, yIdeal=votersDataFramePlotIC$yIdeal)
+    idealPoints <- data.frame(voterID = votersDataFramePlotIC$ID, xIdeal=votersDataFramePlotIC$xLocation, yIdeal=votersDataFramePlotIC$yLocation)
     
     altPointDF <- data.frame(xSQ=altPointPlotIC[1], ySQ=altPointPlotIC[2])
     
     idealPoints$voterID <- as.factor(idealPoints$voterID)
     
-    ICPlot <- ggplot() + 
-        geom_polygon(data = allVotersPrefToSetsDF, mapping = aes(group = voterID, color = voterID, fill = voterID, x = xCoords, y = yCoords), alpha = 1/2) + 
-        geom_point(data = idealPoints, mapping = aes(color = voterID, x = xIdeal, y = yIdeal), size = 3) +
-        geom_point(data = altPointDF, mapping = aes(x = xSQ, y = ySQ), size = 3) +
-        coord_fixed()
+    #### THERE IS A PROBLEM HERE ###
+    #### 01.30.2020 ##############
+    
+    ICPlot <- ggplot2::ggplot() + 
+        ggplot2::geom_polygon(data = allVotersPrefToSetsDF, mapping = ggplot2::aes(group = voterID, color = voterID, fill = voterID, x = xCoords, y = yCoords), alpha = 1/2) + 
+        ggplot2::geom_point(data = idealPoints, mapping = ggplot2::aes(color = voterID, x = xIdeal, y = yIdeal), size = 3) +
+        ggplot2::geom_point(data = altPointDF, mapping = ggplot2::aes(x = xSQ, y = ySQ), size = 3) +
+        ggplot2::coord_fixed()
     
     ICPlot
 } 

@@ -5,10 +5,13 @@
 \title{genCompetitorType
 Assigns each competitor a type based upon parameters provided by the user.}
 \usage{
-genCompetitorType(numCompetitorsGenCompType,
-  allHunterGenCompType = FALSE, probabilityHunterGenCompType = 1,
+genCompetitorType(
+  numCompetitorsGenCompType,
+  allHunterGenCompType = FALSE,
+  probabilityHunterGenCompType = 1,
   probabilityAggregatorGenCompType = 0,
-  probabilityPredatorGenCompType = 0)
+  probabilityPredatorGenCompType = 0
+)
 }
 \arguments{
 \item{numCompetitorsGenCompType}{scalar Number of voters}

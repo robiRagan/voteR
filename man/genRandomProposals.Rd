@@ -5,12 +5,14 @@
 \title{genRandomProposals
 Generates a set of random proposal to face the status quo policy.}
 \usage{
-genRandomProposals(numberOfDimensionsGenRandomProposals = 2,
+genRandomProposals(
+  numberOfDimensionsGenRandomProposals = 2,
   numberOfRandomProposalsGenRandomProposals = 3,
   distributionTypeGenRandomProposals = "unif",
   distributionParametersGenRandomProposals = c(-1, 1),
   dimOneBoundsGenRandomProposals = c(-Inf, Inf),
-  dimTwoBoundsGenRandomProposals = c(-Inf, Inf))
+  dimTwoBoundsGenRandomProposals = c(-Inf, Inf)
+)
 }
 \arguments{
 \item{numberOfDimensionsGenRandomProposals}{The number of policy dimensions.}

@@ -124,7 +124,7 @@ isInICFromPointAndIC <- function(aSexpPoint, aSexpMatrix) {
     .Call('_voteR_isInICFromPointAndIC', PACKAGE = 'voteR', aSexpPoint, aSexpMatrix)
 }
 
-#' isInParetoSetFromPointAndPS
+#' isInParetoSetFromPointAndIdeals
 #' 
 #' This function takes an alternative and a pareto set and checks to see if the
 #' point is in the pareto set. The function \code{isInParetoSetFromPointAndPS()} 
@@ -236,7 +236,7 @@ minkowskiDistancePairOfPoints <- function(idealVector, altVector, orderScalar, s
 #'   location of that alternative in the two dimensional issue space is at
 #'   .25,.75.
 #'   
-#' @param minkoOrderVector A numVoters lengh vector of doubles. It is the ``order" 
+#' @param minkoOrderVector A numVoters length vector of doubles. It is the ``order" 
 #'   of the Minkowski Distance being used. In this packge it should be an 
 #'   element of [1,100]. Examples for cases where the salience on all 
 #'   dimensions is equal: 1 = Manhattan Distance.  diamond shaped indifference
@@ -326,7 +326,7 @@ minkowskiDistanceSets <- function(idealsMatrix, altsMatrix, minkoOrderVector, sa
 #'   a quadratic loss function and their disutility is the square of the minkowski distance.
 #'   This has the effect of causing utility to fall slowly at first as they evaluate alternatives
 #'   closer to their ideal, but then once an alternative is sufficently far away utility falls much
-#'   faster than in teh quadratic case. 
+#'   faster than in the linear case. 
 #'   
 #' @return utilMatrix A numVoters x numAlts matrix that contains the Minkowski
 #'   Utility between each voter and each alternative, given a voter's salience, 

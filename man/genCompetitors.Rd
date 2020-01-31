@@ -5,15 +5,18 @@
 \title{genCompetitors
 Generates a set of Competitors (candidates or parties) that can adjust their location in the space.}
 \usage{
-genCompetitors(numberOfDimensionsGenCompetitors = 1,
+genCompetitors(
+  numberOfDimensionsGenCompetitors = 1,
   numberOfCompetitorsGenCompetitors = 3,
   distributionTypeGenCompetitors = "unif",
   distributionParametersGenCompetitors = c(-1, 1),
   dimOneBoundsGenCompetitors = c(-Inf, Inf),
   dimTwoBoundsGenCompetitors = c(-Inf, Inf),
-  allHunterGenCompetitors = TRUE, probabilityHunterGenCompetitors = 0,
+  allHunterGenCompetitors = TRUE,
+  probabilityHunterGenCompetitors = 0,
   probabilityAggregatorGenCompetitors = 0,
-  probabilityPredatorGenCompetitors = 0)
+  probabilityPredatorGenCompetitors = 0
+)
 }
 \arguments{
 \item{numberOfDimensionsGenCompetitors}{The number of policy dimensions.}

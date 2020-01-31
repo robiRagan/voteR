@@ -5,8 +5,10 @@
 \title{GenSincereProposals
 Generates a set of sincere proposals to face the status quo policy.}
 \usage{
-genSincereProposals(voterIdealsGenSincereProposals,
-  numberOfSincereProposalsGenSincereProposals = 1)
+genSincereProposals(
+  voterIdealsGenSincereProposals,
+  numberOfSincereProposalsGenSincereProposals = 1
+)
 }
 \arguments{
 \item{voterIdealsGenSincereProposals}{The dataframe of voter ideals usually created with \code{\link{genVoters}}. 

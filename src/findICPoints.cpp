@@ -33,7 +33,7 @@ using namespace Rcpp;
 //' @export
 //'
 // [[Rcpp::export]]
-DataFrame findICPoints(NumericVector voterID, NumericVector idealPoint, NumericVector altPointVector, double orderScalar, NumericVector salienceVector, double precision=.01){
+DataFrame findICPoints(CharacterVector voterID, NumericVector idealPoint, NumericVector altPointVector, double orderScalar, NumericVector salienceVector, double precision=.01){
     
     // INVERT SALIENCE VECTOR
     // First the salience vector has to be inversed because salience in all of the
@@ -85,7 +85,7 @@ DataFrame findICPoints(NumericVector voterID, NumericVector idealPoint, NumericV
     
     // Create voter ID as a vector to be used for grouping purposes when plotting
     
-    NumericVector voterIDVector = rep( voterID, xCoords.size() );
+    CharacterVector voterIDVector = rep( voterID, xCoords.size() );
     
     // Store the output in a list before sending it back to R
     return DataFrame::create(_["voterID"]= voterIDVector, _["xCoords"]= xCoordsRcpp, _["yCoords"]= yCoordsRcpp);

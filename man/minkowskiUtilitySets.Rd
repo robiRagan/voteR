@@ -4,8 +4,13 @@
 \alias{minkowskiUtilitySets}
 \title{minkowskiUtilitySets}
 \usage{
-minkowskiUtilitySets(idealsMatrix, altsMatrix, minkoOrderVector,
-  lossOrderVector, salienceMatrix)
+minkowskiUtilitySets(
+  idealsMatrix,
+  altsMatrix,
+  minkoOrderVector,
+  lossOrderVector,
+  salienceMatrix
+)
 }
 \arguments{
 \item{idealsMatrix}{A numberVoters x numberDimensions matrix of numerics.
@@ -42,7 +47,7 @@ alternative is equal to the minkowski distance. If lossOrderVector=2 then the vo
 a quadratic loss function and their disutility is the square of the minkowski distance.
 This has the effect of causing utility to fall slowly at first as they evaluate alternatives
 closer to their ideal, but then once an alternative is sufficently far away utility falls much
-faster than in teh quadratic case.}
+faster than in the linear case.}
 
 \item{salienceMatrix}{A matrix of doubles that is numberOfDimensions long: 
 <sd1, sd2, sd3, ... sdk>. Each element of the vector represents the 
@@ -75,13 +80,15 @@ weights for each policy dimension and a loss order. Each voter can have a
 different loss order for their loss function.
 }
 \seealso{
-Other minkowski: \code{\link{minkowskiDistancePairOfPoints}},
-  \code{\link{minkowskiDistanceSets}},
-  \code{\link{prefOrderMinko}}
+Other minkowski: 
+\code{\link{minkowskiDistancePairOfPoints}()},
+\code{\link{minkowskiDistanceSets}()},
+\code{\link{prefOrderMinko}()}
 
-Other utility functions: \code{\link{minkowskiDistancePairOfPoints}},
-  \code{\link{minkowskiDistanceSets}},
-  \code{\link{prefOrderMinko}}
+Other utility functions: 
+\code{\link{minkowskiDistancePairOfPoints}()},
+\code{\link{minkowskiDistanceSets}()},
+\code{\link{prefOrderMinko}()}
 }
 \concept{minkowski}
 \concept{utility functions}

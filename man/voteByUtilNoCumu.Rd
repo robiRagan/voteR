@@ -9,8 +9,10 @@ Voters allocate their votes based on their preference prdering as determined by 
 They are not allowd to vote for a competitor or alternative more than once. This function is usually not called directly 
 but is wrapped by  \code{\link{votersVote}}.}
 \usage{
-voteByUtilNoCumu(votersUtilsForAltsVoteByUtilNoCumu,
-  numVotesPerVoterVoteByUtilNoCumu)
+voteByUtilNoCumu(
+  votersUtilsForAltsVoteByUtilNoCumu,
+  numVotesPerVoterVoteByUtilNoCumu
+)
 }
 \arguments{
 \item{votersUtilsForAltsVoteByUtilNoCumu}{numVoters by numAlts matrix of utility values.}

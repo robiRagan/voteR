@@ -1,0 +1,26 @@
+#' findParetoSetForDataFrame
+#' Finds the indifference curves for the set of voterDataFrames provided. 
+#' 
+#' @param votersDataFrame The voters data frame must have a specific format, and it must be an R data.frame object. There must be at least these 6 variables and they must have the following names. The order of the variables in the data.frame is not important as long as the variables have the proper names.
+#' 
+#'  ID: A numeric identifier unique to the voter.
+#'  xLocation: The x coordinate of the voter's ideal point.
+#'  yLocation: The y coordinate of the voter's ideal point.
+#'  minkoOrder: The Minkowski order of the voters MInkowski metric based utility function. = 1, is City Block. = 2 is Euclidian and 100 = is  See ?Minkowski. 
+#'  xSalience: The salience of the x dimension for the voter. The dimension with the lowest salience is normalized to 1 and it is the numerarier, the salience of other dimension is measured in units of the numerarire. 
+#'  ySalience: The salience of the y dimension for the voter. he dimension with the lowest salience is normalized to 1 and it is the numerarier, the salience of other dimension is measured in units of the numerarire. 
+#'  lossOrder: The loss order for the agents utility function. See the parameter lossOrderVector in ?minkowskiUtilitySets().
+#' 
+#' @return The set of points that constitutes the pareto set of the set of alternatives. The points are listed down the rows in clockwise or counterclockwise order with the first and last element in the matrix being the same ideal point.
+#' 
+#' @export
+findParetoSetForDataFrame <- function(votersDataFrame){
+    
+    
+    
+    
+    # create
+    outParetoSet <- findParetoSet( cbind(votersDataFrame$xLocation, votersDataFrame$yLocation) )
+    
+    outParetoSet
+} 

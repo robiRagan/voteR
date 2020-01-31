@@ -9,11 +9,11 @@
 using namespace Rcpp;
 
 // findICPoints
-DataFrame findICPoints(NumericVector voterID, NumericVector idealPoint, NumericVector altPointVector, double orderScalar, NumericVector salienceVector, double precision);
+DataFrame findICPoints(CharacterVector voterID, NumericVector idealPoint, NumericVector altPointVector, double orderScalar, NumericVector salienceVector, double precision);
 static SEXP _voteR_findICPoints_try(SEXP voterIDSEXP, SEXP idealPointSEXP, SEXP altPointVectorSEXP, SEXP orderScalarSEXP, SEXP salienceVectorSEXP, SEXP precisionSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type voterID(voterIDSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type voterID(voterIDSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type idealPoint(idealPointSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type altPointVector(altPointVectorSEXP);
     Rcpp::traits::input_parameter< double >::type orderScalar(orderScalarSEXP);
@@ -391,7 +391,7 @@ RcppExport SEXP _voteR_superElipseRadius(SEXP idealPointSEXP, SEXP altPointSEXP,
 static int _voteR_RcppExport_validate(const char* sig) { 
     static std::set<std::string> signatures;
     if (signatures.empty()) {
-        signatures.insert("DataFrame(*findICPoints)(NumericVector,NumericVector,NumericVector,double,NumericVector,double)");
+        signatures.insert("DataFrame(*findICPoints)(CharacterVector,NumericVector,NumericVector,double,NumericVector,double)");
         signatures.insert("DataFrame(*findParetoSet)(SEXP)");
         signatures.insert("long double(*findSuperElipseRadius)(NumericVector,NumericVector,double,NumericVector)");
         signatures.insert("List(*findWinSet)(List)");

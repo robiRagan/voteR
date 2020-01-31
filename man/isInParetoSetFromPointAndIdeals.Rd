@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{isInParetoSetFromPointAndIdeals}
 \alias{isInParetoSetFromPointAndIdeals}
-\title{isInParetoSetFromPointAndPS}
+\title{isInParetoSetFromPointAndIdeals}
 \usage{
 isInParetoSetFromPointAndIdeals(aSexpPoint, aSexpMatrix)
 }

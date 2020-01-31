@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 #include "../inst/include/voteR.h"
 using namespace Rcpp;
-//' isInParetoSetFromPointAndPS
+//' isInParetoSetFromPointAndIdeals
 //' 
 //' This function takes an alternative and a pareto set and checks to see if the
 //' point is in the pareto set. The function \code{isInParetoSetFromPointAndPS()} 

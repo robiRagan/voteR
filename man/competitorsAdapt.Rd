@@ -5,14 +5,17 @@
 \title{competitorsAdapt
 Competitors Adapt According to their type/}
 \usage{
-competitorsAdapt(competitorDataFrameCompetitorAdapts,
+competitorsAdapt(
+  competitorDataFrameCompetitorAdapts,
   voteTotalsForCompetitorsOldCompetitorAdapts,
   voteTotalsForCompetitorsNewCompetitorAdapts,
   seatAllocationForCompetitorsNewCompetitorAdapts,
   seatAllocationForCompetitorsOldCompetitorAdapts,
   electoralFormulaCompetitorAdapts,
   scaledCompetitorAdaptStepSizeCompetitorAdapts,
-  dimOneBoundsCompetitorsAdapt, dimTwoBoundsCompetitorsAdapt)
+  dimOneBoundsCompetitorsAdapt,
+  dimTwoBoundsCompetitorsAdapt
+)
 }
 \arguments{
 \item{competitorDataFrameCompetitorAdapts}{a voteR dataFrame that contains the competitorID, current location, and comeptitor type for each competitor.}

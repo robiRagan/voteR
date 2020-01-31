@@ -11,16 +11,24 @@ a salience weighting matrix using \code{\link{genSalience}}, a Minkowsi Order nu
 These ideal point, salience weights, minkowski distance order and loss function order can be used
 by \code{\link{minkoUtilitySets}} to calulate utility and find indifference curves.}
 \usage{
-genVoters(numberOfDimensionsGenVoters = 1,
-  numberOfVotersGenVoters = 15, distributionTypeGenVoters = "unif",
+genVoters(
+  numberOfDimensionsGenVoters = 1,
+  numberOfVotersGenVoters = 15,
+  distributionTypeGenVoters = "unif",
   distributionParametersGenVoters = c(-1, 1),
-  dimOneBoundsGenVoters = c(-Inf, Inf), dimTwoBoundsGenVoters = c(-Inf,
-  Inf), salienceHeterogeneityGenVoters = 1,
-  maxRelativeSalienceGenVoters = 2, allEllipticalGenVoters = TRUE,
-  probabilityElipticalGenVoters = 1, probabilityDiamondGenVoters = 0,
-  probabilitySquareGenVoters = 0, lossOrderForAllGenVoters = FALSE,
-  probabilityLinearGenVoters = 1, probabilityQuadraticGenVoters = 0,
-  probabilityCubicGenVoters = 0)
+  dimOneBoundsGenVoters = c(-Inf, Inf),
+  dimTwoBoundsGenVoters = c(-Inf, Inf),
+  salienceHeterogeneityGenVoters = 1,
+  maxRelativeSalienceGenVoters = 2,
+  allEllipticalGenVoters = TRUE,
+  probabilityElipticalGenVoters = 1,
+  probabilityDiamondGenVoters = 0,
+  probabilitySquareGenVoters = 0,
+  lossOrderForAllGenVoters = FALSE,
+  probabilityLinearGenVoters = 1,
+  probabilityQuadraticGenVoters = 0,
+  probabilityCubicGenVoters = 0
+)
 }
 \arguments{
 \item{numberOfDimensionsGenVoters}{The number of policy dimensions.}

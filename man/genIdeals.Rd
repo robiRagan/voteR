@@ -8,11 +8,14 @@ Generates ideal points for a set of voters.
 Generates one or two dimensional ideal points from one of given set of distributions, from calibrated data, or from a user provided distribution. 
 it is a wrapper for \code{\link{genPoints}} and is itself further wrapped by \code{\link{genVoters}}.}
 \usage{
-genIdeals(numberOfDimensionsGenIdeals = 1,
-  numberOfIdealsGenIdeals = 100, distributionTypeGenIdeals = "unif",
+genIdeals(
+  numberOfDimensionsGenIdeals = 1,
+  numberOfIdealsGenIdeals = 100,
+  distributionTypeGenIdeals = "unif",
   distributionParametersGenIdeals = c(-1, 1),
-  dimOneBoundsGenIdeals = c(-Inf, Inf), dimTwoBoundsGenIdeals = c(-Inf,
-  Inf))
+  dimOneBoundsGenIdeals = c(-Inf, Inf),
+  dimTwoBoundsGenIdeals = c(-Inf, Inf)
+)
 }
 \arguments{
 \item{numberOfDimensionsGenIdeals}{The number of policy dimensions.}

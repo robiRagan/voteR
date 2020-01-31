@@ -4,8 +4,13 @@
 \alias{prefOrderMinko}
 \title{Preferece Ording Using Minkowski Distance}
 \usage{
-prefOrderMinko(idealsMatrix, altsMatrix, minkoOrderVector, salienceMatrix,
-  lossOrderVector)
+prefOrderMinko(
+  idealsMatrix,
+  altsMatrix,
+  minkoOrderVector,
+  salienceMatrix,
+  lossOrderVector
+)
 }
 \arguments{
 \item{idealsMatrix}{A numberVoters x numberDimensions matrix of numerics.
@@ -65,13 +70,15 @@ prefMatrix A numVoters x numAlts matrix that contains the Minkowski
 Preferece Ording Using Minkowski Distance
 }
 \seealso{
-Other minkowski: \code{\link{minkowskiDistancePairOfPoints}},
-  \code{\link{minkowskiDistanceSets}},
-  \code{\link{minkowskiUtilitySets}}
+Other minkowski: 
+\code{\link{minkowskiDistancePairOfPoints}()},
+\code{\link{minkowskiDistanceSets}()},
+\code{\link{minkowskiUtilitySets}()}
 
-Other utility functions: \code{\link{minkowskiDistancePairOfPoints}},
-  \code{\link{minkowskiDistanceSets}},
-  \code{\link{minkowskiUtilitySets}}
+Other utility functions: 
+\code{\link{minkowskiDistancePairOfPoints}()},
+\code{\link{minkowskiDistanceSets}()},
+\code{\link{minkowskiUtilitySets}()}
 }
 \concept{minkowski}
 \concept{utility functions}

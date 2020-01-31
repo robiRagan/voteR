@@ -30,7 +30,7 @@ using namespace Rcpp;
 //'   location of that alternative in the two dimensional issue space is at
 //'   .25,.75.
 //'   
-//' @param minkoOrderVector A numVoters lengh vector of doubles. It is the ``order" 
+//' @param minkoOrderVector A numVoters length vector of doubles. It is the ``order" 
 //'   of the Minkowski Distance being used. In this packge it should be an 
 //'   element of [1,100]. Examples for cases where the salience on all 
 //'   dimensions is equal: 1 = Manhattan Distance.  diamond shaped indifference

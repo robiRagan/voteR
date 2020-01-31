@@ -5,9 +5,13 @@
 \title{moveDistDAtAngleT
 Takes a two dimensional coordinate and moves it to another coordinate based on a distance and angle.}
 \usage{
-moveDistDAtAngleT(origPointMoveDistDAtAngleT, distanceDMoveDistDAtAngleT,
-  angleTMoveDistDAtAngleT, dimOneBoundsMoveDistDAtAngleT,
-  dimTwoBoundsMoveDistDAtAngleT)
+moveDistDAtAngleT(
+  origPointMoveDistDAtAngleT,
+  distanceDMoveDistDAtAngleT,
+  angleTMoveDistDAtAngleT,
+  dimOneBoundsMoveDistDAtAngleT,
+  dimTwoBoundsMoveDistDAtAngleT
+)
 }
 \arguments{
 \item{origPointMoveDistDAtAngleT}{The inital point in 2D space.}

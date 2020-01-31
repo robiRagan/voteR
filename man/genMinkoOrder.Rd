@@ -5,9 +5,13 @@
 \title{genMinkoOrder 
 Generates Minkowski Orders for voters in a generated voter set.}
 \usage{
-genMinkoOrder(numVotersGenMinko, allEllipticalGenMinko = FALSE,
-  probabilityElipticalGenMinko = 1, probabilityDiamondGenMinko = 0,
-  probabilitySquareGenMinko = 0)
+genMinkoOrder(
+  numVotersGenMinko,
+  allEllipticalGenMinko = FALSE,
+  probabilityElipticalGenMinko = 1,
+  probabilityDiamondGenMinko = 0,
+  probabilitySquareGenMinko = 0
+)
 }
 \arguments{
 \item{numVotersGenMinko}{scalar Number of voters}

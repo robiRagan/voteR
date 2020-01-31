@@ -5,8 +5,10 @@
 \title{voronoiTessellation
 Creates a voroni tessilation of the space.}
 \usage{
-voronoiTessellation(xLocationsVoronoiTessellation,
-  yLocationsVoronoiTessellation)
+voronoiTessellation(
+  xLocationsVoronoiTessellation,
+  yLocationsVoronoiTessellation
+)
 }
 \arguments{
 \item{xLocationsVoronoiTessellation}{The x coordinates for the generator points. Usually this will be the alternatives/competitors in the choice set.}

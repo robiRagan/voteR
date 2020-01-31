@@ -5,8 +5,12 @@
 \title{allocateSeats
 Allocates seats based on the district magnitude (number of seats) and the electoral formula.}
 \usage{
-allocateSeats(voteTotalsAllocateSeats, altsDataFrameAllocateSeats,
-  numSeatsAllocateSeats, electoralFormulaAllocateSeats)
+allocateSeats(
+  voteTotalsAllocateSeats,
+  altsDataFrameAllocateSeats,
+  numSeatsAllocateSeats,
+  electoralFormulaAllocateSeats
+)
 }
 \arguments{
 \item{voteTotalsAllocateSeats}{A 1 x numberOfCompetitors data frame with the vote totals recieved by each competitor.}

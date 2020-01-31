@@ -9,10 +9,14 @@ Generates one or two dimensional points from one of distributions in base R.
 The user can set up bounds on the dimensions. If bounds are set then genPoints() 
 will discard any points outside the bounds and resample.}
 \usage{
-genPoints(numberOfDimensionsGenPoints = 1,
-  numberOfPointsGenPoints = 100, distributionTypeGenPoints = "unif",
-  dimOneBoundsGenPoints = c(-Inf, Inf), dimTwoBoundsGenPoints = c(-Inf,
-  Inf), distributionParametersGenPoints = c(-1, 1))
+genPoints(
+  numberOfDimensionsGenPoints = 1,
+  numberOfPointsGenPoints = 100,
+  distributionTypeGenPoints = "unif",
+  dimOneBoundsGenPoints = c(-Inf, Inf),
+  dimTwoBoundsGenPoints = c(-Inf, Inf),
+  distributionParametersGenPoints = c(-1, 1)
+)
 }
 \arguments{
 \item{numberOfDimensionsGenPoints}{The number of policy dimensions.}

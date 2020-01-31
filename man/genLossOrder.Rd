@@ -5,9 +5,13 @@
 \title{genLossOrder 
 Generates Loss Function Orders for voters in a generated voter set.}
 \usage{
-genLossOrder(numVotersGenLoss, lossOrderForAllGenLoss = FALSE,
-  probabilityLinearGenLoss = 1, probabilityQuadraticGenLoss = 0,
-  probabilityCubicGenLoss = 0)
+genLossOrder(
+  numVotersGenLoss,
+  lossOrderForAllGenLoss = FALSE,
+  probabilityLinearGenLoss = 1,
+  probabilityQuadraticGenLoss = 0,
+  probabilityCubicGenLoss = 0
+)
 }
 \arguments{
 \item{numVotersGenLoss}{scalar Number of voters}

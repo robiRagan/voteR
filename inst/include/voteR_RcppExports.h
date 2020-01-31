@@ -24,11 +24,11 @@ namespace voteR {
         }
     }
 
-    inline DataFrame findICPoints(NumericVector voterID, NumericVector idealPoint, NumericVector altPointVector, double orderScalar, NumericVector salienceVector, double precision = .01) {
+    inline DataFrame findICPoints(CharacterVector voterID, NumericVector idealPoint, NumericVector altPointVector, double orderScalar, NumericVector salienceVector, double precision = .01) {
         typedef SEXP(*Ptr_findICPoints)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_findICPoints p_findICPoints = NULL;
         if (p_findICPoints == NULL) {
-            validateSignature("DataFrame(*findICPoints)(NumericVector,NumericVector,NumericVector,double,NumericVector,double)");
+            validateSignature("DataFrame(*findICPoints)(CharacterVector,NumericVector,NumericVector,double,NumericVector,double)");
             p_findICPoints = (Ptr_findICPoints)R_GetCCallable("voteR", "_voteR_findICPoints");
         }
         RObject rcpp_result_gen;

@@ -8,11 +8,14 @@ Generates a set of alternatives or a single status quo.
 Generates one or more one or two dimensional alternatives from one of given set of distributions, from calibrated data, or from a user provided distribution. 
 it is a wrapper for \code{\link{genPoints}}.}
 \usage{
-genAlts(numberOfDimensionsGenAlts = 1, numberOfAltsGenAlts = 5,
+genAlts(
+  numberOfDimensionsGenAlts = 1,
+  numberOfAltsGenAlts = 5,
   distributionTypeGenAlts = "unif",
   distributionParametersGenAlts = c(-1, 1),
-  dimOneBoundsGenAlts = c(-Inf, Inf), dimTwoBoundsGenAlts = c(-Inf,
-  Inf))
+  dimOneBoundsGenAlts = c(-Inf, Inf),
+  dimTwoBoundsGenAlts = c(-Inf, Inf)
+)
 }
 \arguments{
 \item{numberOfDimensionsGenAlts}{The number of policy dimensions.}

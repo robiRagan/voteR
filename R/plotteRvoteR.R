@@ -47,24 +47,44 @@
 #' 
 #' @export
 # TODO I will need to write a simple function for plotting things that takes care of most cases and plots well. And a version where the user can control all of the detials like opacity, colors, layering etc.
-plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitorPoints = as.matrix(NA), plotIdeals = FALSE, plotPareto = FALSE, plotICs = FALSE, locationForICs=NA,  plotAlts = FALSE, plotCompetitors = FALSE, plotVoronoi = FALSE, plotMarginalMedian = FALSE,precision=.01, yToXRatio = 1, showLegend = TRUE, showLegendBy = "pointTypes", xBounds = FALSE, yBounds = FALSE){
+plotteRvoteR <- function( votersDataFrame=NA,
+                          altPoints=as.matrix(NA),
+                          competitorPoints = as.matrix(NA),
+                          plotIdeals = FALSE,
+                          plotPareto = FALSE,
+                          plotICs = FALSE,
+                          locationForICs=NA,
+                          plotAlts = FALSE,
+                          plotCompetitors = FALSE,
+                          plotVoronoi = FALSE,
+                          plotMarginalMedian = FALSE,
+                          precision=.01,
+                          yToXRatio = 1,
+                          showLegend = TRUE,
+                          showLegendBy = "pointTypes",
+                          xBounds = FALSE,
+                          yBounds = FALSE){
     
-# ## TEST ##
-#     votersDataFrame<-voterIdeals
-#     altPoints<- as.matrix(NA)
-#     competitorPoints <- competitorPoints
+
+  
+#   ## TEST ##
+#   rm(list = ls(all = TRUE))
+#     votersDataFrame<-data.frame(pointType= rep("voter", 5), ID = c("V-1", "V-2", "V-3", "V-4", "V-5"), xLocation=c(15, 20, 35, 40, 55), yLocation=c(45, 15, 50, 35, 30), minkoOrder=c(2, 2, 2, 2, 2), xSalience = c(1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1) )
+#     altPoints = c(30,40)
+#     competitorPoints <- as.matrix(NA)
 #     plotIdeals <- TRUE
 #     plotPareto <- TRUE
 #     plotICs <- TRUE
 #     locationForICs=NA
-#     plotAlts <- FALSE
-#     plotCompetitors <- TRUE
-#     plotVoronoi <- TRUE
+#     plotAlts <- TRUE
+#     plotCompetitors <- FALSE
+#     plotVoronoi <- FALSE
+#     plotMarginalMedian <- TRUE
 #     precision<-.01
 #     yToXRatio <- 1
 #     showLegend <- TRUE
-#     xBounds <- dimOneBounds
-#     yBounds <- dimTwoBounds
+#     xBounds <- c(0,100)
+#     yBounds <- c(0,100)
 # ## TEST ##
 
     
@@ -88,36 +108,156 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
   # yBounds <- dimTwoBounds 
   # ## TEST Using devVoteRScript_SEA18.R ###
 
+  # # ## TEST  ###
+  # rm(list = ls(all = TRUE))
+  # votersDataFrame = data.frame( pointType= rep("voter", 5), 
+  #                               ID = c("V-1", "V-2", "V-3", "V-4", "V-5"), 
+  #                               xLocation=c(15, 20, 35, 40, 55), 
+  #                               yLocation=c(45, 15, 50, 35, 30), 
+  #                               minkoOrder=c(2, 2, 2, 2, 2), 
+  #                               xSalience = c(1, 1, 1, 1, 1), 
+  #                               ySalience = c(1, 1, 1, 1, 1) ) 
+  # altPoints = c(30,40)
+  # plotIdeals = TRUE 
+  # plotICs = TRUE 
+  # plotPareto = TRUE 
+  # plotAlts = TRUE 
+  # yToXRatio = 1
+  # 
+  # competitorPoints = as.matrix(NA)
+  # locationForICs=NA
+  # plotCompetitors = FALSE
+  # plotVoronoi = FALSE
+  # plotMarginalMedian = FALSE
+  # precision=.01
+  # showLegend = TRUE
+  # showLegendBy = "pointTypes"
+  # xBounds = FALSE
+  # yBounds = FALSE
+  # # ## TEST ###
+  
+  
+    
+    # If altPoints is supplied to the function, we must convert it to a dataframe before calling the plot functions.
+    
+    if(is.na(altPoints[1]) == TRUE){
+      altPointsDF <- data.frame(NA)
+    } else if(is.vector(altPoints) == TRUE) {
+      altPointsDF <- data.frame(xLocation=altPoints[1], yLocation=altPoints[2])
+    }else if(is.matrix(altPoints) == TRUE) {
+      altPointsDF <- data.frame(xLocation=altPoints[ ,1], yLocation=altPoints[ ,2])
+    }
+    if(is.na(altPointsDF[1])==FALSE){
+      altPointsDF$alternativeID <- paste( "A",seq(from = 1,to = nrow(altPointsDF)), sep="-" )
+    }
+    
+    # If competitorPoints is supplied to the function, we must convert it to a dataframe before calling the plot functions.
+    ## THIS CHANGE HAS NOT BEEN CHECKED YET 01.30.2020 ###
+    if(is.na(competitorPoints[1]) == TRUE){
+      competitorPointsDF <- data.frame(NA)
+    } else if(is.vector(competitorPoints) == TRUE) {
+      competitorPointsDF <- data.frame(xLocation=competitorPoints[1], yLocation=competitorPoints[2])
+    }else if(is.matrix(competitorPoints) == TRUE) {
+      competitorPointsDF <- data.frame(xLocation=competitorPoints[ ,1], yLocation=competitorPoints[ ,2])
+    }
     
     
     
     
     # First a set of checks is run to ensure that the information that is needed to plot the components of the graph via the plotXXXX = TRUE parameters have been supplied to the plotteRvoteR().
     
-    if(is.na(altPoints[1]) & plotAlts == TRUE){ stop('There was a request to plot the alternatives via (plotAlts=TRUE), However, no altPoints were supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
-    if(is.na(competitorPoints[1,1]) & plotCompetitors == TRUE){ stop('There was a request to plot the competitors via (plotCompetitors=TRUE), However, no competitorPoints were supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
+    if(is.na(altPointsDF[1]) & plotAlts == TRUE){ stop('There was a request to plot the alternatives via (plotAlts=TRUE), However, no altPoints were supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
+    if(is.na(competitorPointsDF[1]) & plotCompetitors == TRUE){ stop('There was a request to plot the competitors via (plotCompetitors=TRUE), However, no competitorPoints were supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
     if(any(is.na(votersDataFrame[1])) & plotIdeals == TRUE){ stop('There was a request to plot the ideal points via plotIdeals=TRUE. However, no votersDataFrame was supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
     if(any(is.na(votersDataFrame[1])) & plotPareto == TRUE){ stop('There was a request to plot the Pareto set via plotPareto=TRUE. However, no votersDataFrame was supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
     if(any(is.na(votersDataFrame[1])) & plotICs == TRUE){ stop('There was a request to plot the indifference curves via plotICs=TRUE. However, no votersDataFrame was supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
-    if(any(is.na(altPoints[1])) & any(is.na(competitorPoints[1])) & plotICs == TRUE){ stop('There was a request to plot the indifference curves via plotICs=TRUE. However, no alternative (altPoints) or competitors (competitorPoints) were supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
-    
+    if(any(is.na(altPoints[1])) & any(is.na(competitorPoints[1])) & plotICs == TRUE){ stop('There was a request to plot the indifference curves via plotICs=TRUE. However, no alternatives (altPoints) or competitors (competitorPoints) were supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
+    if(any(is.na(altPointsDF[1])) & any(is.na(competitorPointsDF[1])) & plotVoronoi == TRUE){ stop('There was a request to plot the cutlines/Voronoi Tessellation via plotVoronoi=TRUE. However, no alternatives (altPoints) or competitors (competitorPoints) were supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
+    if( nrow(altPointsDF) <= 2  & nrow(competitorPointsDF)<=2  & plotVoronoi == TRUE){ stop('There was a request to plot the cutlines/Voronoi Tessellation via plotVoronoi=TRUE. However, only one alternative (altPoints) or competitor (competitorPoints) was supplied to plotteRvoteR(). See ?plotteRvoteR for help.')}
 
     
-    # If altPoints is supplied to the function, we must convert it to a dataframe before calling the plot functions.
+
+    # Next a set of checks is run to ensure that the alts, competitor points and/or ideals that the user has requested to plot are all within the boundary parameters have been supplied to the plotteRvoteR().
     
-    if(is.na(altPoints[1]) == TRUE){
-        altPointsDF <- NA
-    } else if(is.vector(altPoints) == TRUE) {
-        altPointsDF <- data.frame(xAlts=altPoints[1], yAlts=altPoints[2])
-    }else if(is.matrix(altPoints) == TRUE) {
-        altPointsDF <- data.frame(xAlts=altPoints[ ,1], yAlts=altPoints[ ,2])
+    # If voters were supplied find the max and min on each dimension
+    if(any(is.na(votersDataFrame[1]))==FALSE){
+    
+      minXIdeals <- min(votersDataFrame$xLocation)
+      maxXIdeals <- max(votersDataFrame$xLocation)
+      minYIdeals <- min(votersDataFrame$yLocation)
+      maxYIdeals <- max(votersDataFrame$yLocation)
+    
+      if (xBounds != FALSE){
+      # check the bounds for the ideals
+        
+        if(xBounds[1] > minXIdeals & plotIdeals == TRUE){ stop('There was a request to plot the ideal points via (plotIdeals=TRUE), However, the the X-coordinate of one of the ideal points is below the minimum X in the xBounds. See ?plotteRvoteR for help.')}
+        if(xBounds[2] < maxXIdeals  & plotIdeals == TRUE){ stop('There was a request to plot the ideal points via (plotIdeals=TRUE), However, the the X-coordinate of one of the ideal points is above the maximum X in the xBounds. See ?plotteRvoteR for help.')}
+        }
+        
+      if (yBounds != FALSE){
+        if(yBounds[1] > minYIdeals & plotIdeals == TRUE){ stop('There was a request to plot the ideal points via (plotIdeals=TRUE), However, the the Y-coordinate of one of the ideal points is below the minimum Y in the yBounds. See ?plotteRvoteR for help.')}
+        if(yBounds[2] < maxYIdeals  & plotIdeals == TRUE){ stop('There was a request to plot the ideal points via (plotIdeals=TRUE), However, the the Y-coordinate of one of the ideal points is above the maximum Y in the yBounds. See ?plotteRvoteR for help.')}
+        }
+        
+      }
+    
+    
+    
+    # If alts were supplied find the max and min on each dimension
+    if(is.na(altPointsDF[1])==FALSE){
+    
+      minXAlts <- min(altPointsDF$xLocation)
+      maxXAlts <- max(altPointsDF$xLocation)
+      minYAlts <- min(altPointsDF$yLocation)
+      maxYAlts <- max(altPointsDF$yLocation)
+    
+      if (xBounds != FALSE){
+      # Check the bounds for the alts
+        if(xBounds[1] > minXAlts & plotAlts == TRUE){ stop('There was a request to plot the alternatives via (plotAlts=TRUE), However, the the X-coordinate of one of the alternatives is below the minimum X in the xBounds. See ?plotteRvoteR for help.')}
+        if(xBounds[2] < maxXAlts  & plotAlts == TRUE){ stop('There was a request to plot the alternatives via (plotAlts=TRUE), However, the the X-coordinate of one of the alternatives is above the maximum X in the xBounds. See ?plotteRvoteR for help.')}
+      }
+        
+      if (yBounds != FALSE){
+        if(yBounds[1] > minYAlts & plotAlts == TRUE){ stop('There was a request to plot the alternatives via (plotAlts=TRUE), However, the the Y-coordinate of one of the alternatives is below the minimum Y in the yBounds. See ?plotteRvoteR for help.')}
+        if(yBounds[2] < maxYAlts  & plotAlts == TRUE){ stop('There was a request to plot the alternatives via (plotAlts=TRUE), However, the the Y-coordinate of one of the alternatives is above the maximum Y in the yBounds. See ?plotteRvoteR for help.')}
+      }
+    }
+    
+    
+    
+    # If competitors were supplied find the max and min on each dimension
+    if(is.na(competitorPointsDF[1])==FALSE){
+    
+      minXCompetitor <- min(competitorPointsDF$xLocation)
+      maxXCompetitor <- max(competitorPointsDF$xLocation)
+      minYCompetitor <- min(competitorPointsDF$yLocation)
+      maxYCompetitor <- max(competitorPointsDF$yLocation)
+    
+      
+      if (xBounds != FALSE){
+      # Check the bounds for the competitors
+        if(xBounds[1] > minXCompetitor & plotAlts == TRUE){ stop('There was a request to plot the competitors via (plotAlts=TRUE), However, the the X-coordinate of one of the competitors is below the minimum X in the xBounds. See ?plotteRvoteR for help.')}
+        if(xBounds[2] < maxXCompetitor  & plotAlts == TRUE){ stop('There was a request to plot the competitors via (plotAlts=TRUE), However, the the X-coordinate of one of the competitors is above the maximum X in the xBounds. See ?plotteRvoteR for help.')}
+      }
+        
+      if (yBounds != FALSE){  
+        if(yBounds[1] > minYCompetitor & plotAlts == TRUE){ stop('There was a request to plot the competitors via (plotAlts=TRUE), However, the the Y-coordinate of one of the competitors is below the minimum Y in the yBounds. See ?plotteRvoteR for help.')}
+        if(yBounds[2] < maxYCompetitor  & plotAlts == TRUE){ stop('There was a request to plot the competitors via (plotAlts=TRUE), However, the the Y-coordinate of one of the competitors is above the maximum Y in the yBounds. See ?plotteRvoteR for help.')}
+      }
     }
     
 
     
 
+
+    
+    
+
+    
+    
+    
     ## The code that actually generates the plots is here.     
-    voteplot <- ggplot() +  coord_fixed()
+    voteplot <- ggplot2::ggplot() +  ggplot2::coord_fixed()
     
     
     
@@ -131,13 +271,13 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
         
         if(is.na(locationForICs[1]) & (is.na(competitorPoints[1,1])==FALSE)){locationForICs <- c(competitorPoints$xLocation[1], competitorPoints$yLocation[1])}
         
-        if(is.na(locationForICs[1]) & (is.na(altPoints[1,1])==FALSE)){locationForICs <- c(altPoints$xLocation[1], altPoints$yLocation[1])}
+        if(is.na(locationForICs[1]) & (is.na(altPointsDF[1,1])==FALSE)){locationForICs <- c(altPointsDF$xLocation[1], altPointsDF$yLocation[1])}
         
         # creates a blank list to place the Preferred to sets of the voters in
         allVotersICPointsList <- list()
         
         for (j in 1:nrow(votersDataFrame)){
-            allVotersICPointsList[[j]] <- findICPoints(voterID = votersDataFrame$ID[j], idealPoint = c(votersDataFrame$xLocation[j], votersDataFrame$yLocation[j]), orderScalar = votersDataFrame$minkoOrder[j], salienceVector = c(votersDataFrame$xSalience[j], votersDataFrame$ySalience[j]), altPoint = locationForICs, precision = .01)
+            allVotersICPointsList[[j]] <- findICPoints(voterID = votersDataFrame$ID[j], idealPoint = c(votersDataFrame$xLocation[j], votersDataFrame$yLocation[j]), orderScalar = votersDataFrame$minkoOrder[j], salienceVector = c(votersDataFrame$xSalience[j], votersDataFrame$ySalience[j]), altPointVector = locationForICs, precision = .01)
         }
         
         # Collapse the list to a data frame. 
@@ -148,7 +288,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
         
         allVotersPrefToSetsDF$ID <- as.factor(allVotersPrefToSetsDF$ID)
         
-        voteplot <- voteplot + geom_polygon(data = allVotersPrefToSetsDF, mapping = aes(color = ID, fill = ID, x = xCoords, y = yCoords), alpha = 1/(2*nrow(competitorPoints)))
+        voteplot <- voteplot + ggplot2::geom_polygon(data = allVotersPrefToSetsDF, mapping = ggplot2::aes(color = ID, fill = ID, x = xCoords, y = yCoords), alpha = 1/(2*nrow(competitorPoints)))
         
     }
     
@@ -160,7 +300,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
         
         paretoSetDF <- findParetoSet(justIdealPoints)
         
-        voteplot <- voteplot + geom_polygon(data = paretoSetDF, mapping = aes(x = V1, y = V2, alpha=1), fill="grey", color="grey50") + scale_alpha(labels = "")
+        voteplot <- voteplot + ggplot2::geom_polygon(data = paretoSetDF, mapping = ggplot2::aes(x = V1, y = V2, alpha=1), fill="grey", color="grey50") + ggplot2::scale_alpha(labels = "")
     }
     
     ################################################
@@ -171,7 +311,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
         
         if((is.na(competitorPoints[1,1])==FALSE)){dataFrameForVoronoi <- competitorPoints}
         
-        if((is.na(altPoints[1,1])==FALSE)){dataFrameForVoronoi <- altPoints}
+        if((is.na(altPointsDF[1,1])==FALSE)){dataFrameForVoronoi <- altPointsDF}
         
             if(as.character(xBounds[1])==FALSE | as.character(yBounds[1])==FALSE){
                 calcVoronoi <- suppressMessages( deldir::deldir(dataFrameForVoronoi$xLocation, dataFrameForVoronoi$yLocation) )
@@ -179,7 +319,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
                 calcVoronoi <- suppressMessages( deldir::deldir(dataFrameForVoronoi$xLocation, dataFrameForVoronoi$yLocation, rw=c(xBounds[1], xBounds[2], yBounds[1], yBounds[2])) )
             }
         #Now we can make a plot
-        voteplot <- voteplot + geom_segment(data = calcVoronoi$dirsgs, mapping = aes( x = x1, y = y1, xend = x2, yend = y2, linetype=""), color="gray", size=1)
+        voteplot <- voteplot + ggplot2::geom_segment(data = calcVoronoi$dirsgs, mapping = ggplot2::aes( x = x1, y = y1, xend = x2, yend = y2, linetype=""), color="gray", size=1)
         
     }
     
@@ -195,7 +335,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
          
          votersDataFrame$ID <- as.factor(votersDataFrame$ID)
          
-         voteplot <- voteplot + geom_point(data = votersDataFrame, mapping = aes(shape=pointType, color = ID, x = xLocation, y = yLocation), size = 3) # + scale_shape(labels = "A Voter")
+         voteplot <- voteplot + ggplot2::geom_point(data = votersDataFrame, mapping = ggplot2::aes(shape=pointType, color = ID, x = xLocation, y = yLocation), size = 3) # + scale_shape(labels = "A Voter")
      }
      
     
@@ -203,50 +343,56 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
         
         marginalMedian <- data.frame( xMedian=median(votersDataFrame$xLocation), yMedian=median(votersDataFrame$yLocation), pointType="marginal median" )
         
-        voteplot <- voteplot + geom_point(data = marginalMedian, mapping = aes(shape=pointType, x = xMedian, y = yMedian), size = 3) # + scale_shape(labels = "A Voter")
+        voteplot <- voteplot + ggplot2::geom_point(data = marginalMedian, mapping = ggplot2::aes(shape=pointType, x = xMedian, y = yMedian), size = 3) # + scale_shape(labels = "A Voter")
     }
     
     
     ## Now plot the alternatives ##
     
     if ( plotAlts == TRUE){
-        voteplot <- voteplot + geom_point(data = altPoints, mapping = aes(shape=pointType, x = xLocation, y = yLocation), size = 4) + geom_text(data = altPoints, mapping = aes(x = xLocation, y = yLocation, label=alternativeID), hjust=0, vjust=1.75)# + scale_shape(labels = "An Alternative")
+      altPointsDF$pointType <- "alternative"
+      
+      voteplot <- voteplot + ggplot2::geom_point(data = altPointsDF, mapping = ggplot2::aes(shape=pointType, x = xLocation, y = yLocation), size = 4) + ggplot2::geom_text(data = altPointsDF, mapping = ggplot2::aes(x = xLocation, y = yLocation, label=alternativeID), hjust=0, vjust=1.75)# + scale_shape(labels = "An Alternative")
     }   
     
     
     ## Now plot the competitors ##
     
     if ( plotCompetitors == TRUE){
-        voteplot <- voteplot + geom_point(data = competitorPoints, mapping = aes(shape=pointType, x = xLocation, y = yLocation), size = 4) + geom_text(data = competitorPoints, mapping = aes(x = xLocation, y = yLocation, label=ID), hjust=0, vjust=1.75)# + scale_shape(labels = "A Competitor")
+        voteplot <- voteplot + ggplot2::geom_point(data = competitorPoints, mapping = ggplot2::aes(shape=pointType, x = xLocation, y = yLocation), size = 4) + geom_text(data = competitorPoints, mapping = aes(x = xLocation, y = yLocation, label=ID), hjust=0, vjust=1.75)# + scale_shape(labels = "A Competitor")
     }
     
     
     ## Adjust the labels on axis and legend#
-    voteplot <- voteplot + labs(x = "Issue Dimension 1", y = "Issue Dimension 2", alpha = "Pareto Set", shape = "Point Type", linetype="Voronoi Cutlines", color="Voter ID", fill="Voter ID")
+    voteplot <- voteplot + ggplot2::labs(x = "Issue Dimension 1", y = "Issue Dimension 2", alpha = "Pareto Set", shape = "Point Type", linetype="Voronoi Cutlines", color="Voter ID", fill="Voter ID")
     
     ## Fix the shapes so everything in the plot and legend line up ##
-    voteplot <- voteplot  + scale_shape_manual( values = c(18, 8, 16) )
+    ## This will have to be generalized for the fact that not every plot will have the same number of different points ##
+    voteplot <- voteplot  + ggplot2::scale_shape_manual( values = c(18, 8, 16) )
                                  
     
     ## Make the plot fit the user provided yToXRatio or make square:
-    voteplot <- suppressMessages(voteplot + coord_equal(ratio = yToXRatio))
+    voteplot <- suppressMessages(voteplot + ggplot2::coord_equal(ratio = yToXRatio))
     
     
     ###################################
     # Set the bounds of the plot.
     # Note this uses coord_cartesian() which keeps all underlying data in the plot.
     # Think of it as zooming in on the plot based on the bounds
+    # ## THIS NEEDS TO BE GENERALIZED SO ICs do not go off the graph ###
     ###################################
+    
+  
     if (as.character(xBounds[1]) != FALSE & as.character(yBounds[1]) == FALSE){
-        voteplot <- suppressMessages( voteplot + coord_cartesian(xlim = c(xBounds[1], xBounds[2])) )
+        voteplot <- suppressMessages( voteplot + ggplot2::coord_cartesian(xlim = c(xBounds[1], xBounds[2])) )
     }  
     
     if (as.character(yBounds[1]) != FALSE & as.character(xBounds[1]) == FALSE){
-        voteplot <- suppressMessages( voteplot + coord_cartesian(ylim = c(yBounds[1], yBounds[2])) )
+        voteplot <- suppressMessages( voteplot + ggplot2::coord_cartesian(ylim = c(yBounds[1], yBounds[2])) )
     }  
     
     if (as.character(xBounds[1]) != FALSE & as.character(yBounds[1]) != FALSE){
-        voteplot <- suppressMessages( voteplot + coord_cartesian(xlim = c(xBounds[1], xBounds[2]), ylim = c(yBounds[1], yBounds[2])) )
+        voteplot <- suppressMessages( voteplot + ggplot2::coord_cartesian(xlim = c(xBounds[1], xBounds[2]), ylim = c(yBounds[1], yBounds[2])) )
     }  
     
     # if (showLegend == TRUE){
@@ -259,7 +405,7 @@ plotteRvoteR <- function(votersDataFrame=NA, altPoints=as.matrix(NA), competitor
     
     
     if (showLegend == FALSE){
-        voteplot <- voteplot + theme(legend.position="none")
+        voteplot <- voteplot + ggplot2::theme(legend.position="none")
     
         }
     

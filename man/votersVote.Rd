@@ -7,9 +7,13 @@ Alocates votes for a  set of competitors/alternatives according to a set of mode
  
 Voters cast their votes for the competitors or alternatives in the choice set based on a set of model parameters.}
 \usage{
-votersVote(voterDataFrameVotersVote = NA, altsDataFrameVotersVote = NA,
-  abstentionThresholdVotersVote, numVotesPerVoterVotersVote,
-  cumulationParameterVotersVote)
+votersVote(
+  voterDataFrameVotersVote = NA,
+  altsDataFrameVotersVote = NA,
+  abstentionThresholdVotersVote,
+  numVotesPerVoterVotersVote,
+  cumulationParameterVotersVote
+)
 }
 \arguments{
 \item{voterDataFrameVotersVote}{a voterR voter dataFrame that contains the voterID, ideal point location, minkowski order, loss order, and salience weights for each voter.}

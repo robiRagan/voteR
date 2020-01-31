@@ -1,6 +1,8 @@
 #####################################################
 # This is an R script I use when doing development work on the package. The end user should not have a need to use this script.
 #
+# Used to write and test code for looking at different voting Rules
+#
 #####################################################
 rm(list = ls(all = TRUE))
 
@@ -22,14 +24,7 @@ numAltsGlobal <- 2
 ##############################################
 ## LOAD THE PACKAGES (Install if not loaded):
 ##############################################
-# install.packages("Rcpp")
 
-
-# install.packages("BH")
-
-
-# install.packages("ggplot2")
-library(ggplot2)
 
 
 library(voteR)
@@ -41,136 +36,241 @@ library(voteR)
 
 set.seed(123) # for development purposes
 
-#1) Create a static Voter Data Frame for testing
-
-staticVoterDataFrame1 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), xIdeal=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, -.44), yIdeal=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.03), minkoOrder=c(1, 2, 4, 2, 1, 1, 2, 10, 2, 1, 2), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
 
 
-# 2) Gen a set of voters and store them for use across all runs of the model. (everntually we need a genVoterDataFrame function)
 
-    #2a) Generate Ideal Points
+# 1) Create three sets of alternatives for testing purposes
 
-    ideals <- genIdeals(numberOfDimensionsGenIdeals = numDimsGlobal, numberOfIdealsGenIdeals = numVotersGlobal, distributionTypeGenIdeals = "norm", distributionParametersGenIdeals = c(0,.2))
-
-    # idealsDF <- data.frame(ideals)
-
-    # 2b) Generate the Salience
-
-    salience <- genSalience(numVotersGenSalience = numVotersGlobal, numDimsGenSalience = numDimsGlobal, salienceHeterogeneityGenSalience = 0, maxRelativeSalienceGenSalience = 3)
-
-    # 2c) Generate a Minkowski Order
-
-    minkoOrder <- sample(x = c(1,2,3,10,1000), size = numVotersGlobal, replace = TRUE, prob = c(.25,.5,.1,.05,.1))
-
-# 3) Gen a set of Alternatives (note you can use genIdeals() for this too)
-
-    altsGen1 <- genAlts(numberOfDimensionsGenAlts = numDimsGlobal, numberOfVotersGenAlts = 2, distributionTypeGenAlts = "norm", distributionParametersGenAlts =  c(0,.2))
+    generatedAltsDataFrame1 <- genAlts(numberOfDimensionsGenAlts = numDimsGlobal, numberOfAltsGenAlts = 2, distributionTypeGenAlts = "norm", distributionParametersGenAlts =  c(0,.2))
 
     
-    altsGen2 <- genAlts(numberOfDimensionsGenAlts = numDimsGlobal, numberOfVotersGenAlts = 25, distributionTypeGenAlts = "unif", distributionParametersGenAlts =  c(-1,1))
+    generatedAltsDataFrame2 <- genAlts(numberOfDimensionsGenAlts = numDimsGlobal, numberOfAltsGenAlts = 25, distributionTypeGenAlts = "unif", distributionParametersGenAlts =  c(-1,1))
     
+    
+    staticAltsDataFrame1 <- data.frame(pointType = rep(x = "alternative", 3), ID = c("A-1", "A-2", "A-3"), xLocation=c(-3/8, 1/8, 2/8), yLocation=c(-3/8, 1/8, 7/8) )
+
+# 2) Create three voter data frames to test with:
+
+generatedVoterDataFrame1 <- genVoters(numberOfDimensionsGenVoters = numDimsGlobal, numberOfVotersGenVoters = 25, distributionTypeGenVoters = "unif")
+
+generatedVoterDataFrame2 <- genVoters(numberOfDimensionsGenVoters = numDimsGlobal, numberOfVotersGenVoters = numVotersGlobal, distributionTypeGenVoters = "unif")
+    
+staticVoterDataFrame1 <- data.frame(pointType = rep(x = "voter", 3), ID = c("V-1", "V-2", "V-3"), xLocation=c(-1/8, 7/8, 4/8), yLocation=c(3/8, 4/8, -3/8), minkoOrder=c(1, 2, 100), xSalience = c(1, 1, 1), ySalience = c(1, 1, 1), lossOrder = c(1, 2, 1) )
 
 
-# 4) Create three voter data frames to test with:
-
-generatedVoterDataFrame1 <- data.frame(voterID = seq(from = 1,to = numVotersGlobal), xIdeal=ideals[ ,1], yIdeal=ideals[ ,2], minkoOrder=minkoOrder, xSalience = salience[ ,1], xSalience = salience[ ,2] )
-
-staticVoterDataFrame1 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), xIdeal=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, -.44), yIdeal=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.03), minkoOrder=c(1, 2, 4, 2, 1, 1, 2, 10, 2, 1, 2), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+# 3) Calulate the Minkowski Distance and Minkowsi Utility of each voter from each alt:
 
 
-# 5) Calulate the Minkowski Distance and Minkowsi Utility of each voter from each alt:
+minkoDist1 <- calcMinkowskiDistanceVotersAlts(votersCalcMinkowskiDistanceVotersAlts = staticVoterDataFrame1, alternativesCalcMinkowskiDistanceVotersAlts = staticAltsDataFrame1)
 
-altsGen1
-
-minkoDist1 <- minkowskiDistanceSets(idealsMatrix = as.matrix(ideals), altsMatrix = altsGen1, orderVector = rep(2,nrow(ideals)), salienceMatrix = salience)
-
-minkoUtil1 <- minkowskiUtilitySets(idealsMatrix = as.matrix(ideals), altsMatrix = altsGen2, minkoOrderVector = rep(2,nrow(ideals)), lossOrderVector =  rep(2,nrow(ideals)), salienceMatrix = salience)
+minkoDist1
 
 
-altsGen2
+minkoUtil1 <- calcMinkowskiUtilityVotersAlts(votersCalcMinkowskiDistanceVotersAlts = staticVoterDataFrame1, alternativesCalcMinkowskiDistanceVotersAlts = staticAltsDataFrame1)
 
-minkoDist2 <- minkowskiDistanceSets(idealsMatrix = as.matrix(ideals), altsMatrix = altsGen2, orderVector = rep(2,nrow(ideals)), salienceMatrix = salience)
-
-
-minkoUtil2 <- minkowskiUtilitySets(idealsMatrix = as.matrix(ideals), altsMatrix = altsGen2, minkoOrderVector = rep(2,nrow(ideals)), lossOrderVector =  rep(2,nrow(ideals)), salienceMatrix = salience)
+minkoUtil1
 
 
-# 6) Find the Pareto Set of the Group of Voters
 
-paretoSet <- findParetoSet( cbind(generatedVoterDataFrame1$xIdeal, generatedVoterDataFrame1$yIdeal) )
+# 4) Find the Pareto Set of the Group of Voters using undelying Rcpp function
+
+paretoSetG1 <- findParetoSet( cbind(generatedVoterDataFrame1$xLocation, generatedVoterDataFrame1$yLocation) )
                   
-paretoSet
+paretoSetG1
 
 
-aParetoSet <- findParetoSet( cbind(staticVoterDataFrame1$xIdeal, staticVoterDataFrame1$yIdeal) )
 
-aParetoSet
+paretoSetG2 <- findParetoSet( cbind(generatedVoterDataFrame2$xLocation, generatedVoterDataFrame2$yLocation) )
+
+paretoSetG2
+
+
+
+paretoSetS1 <- findParetoSet( cbind(staticVoterDataFrame1$xLocation, staticVoterDataFrame1$yLocation) )
+
+paretoSetS1
+
+
+
+
+
+# 5) Find the Pareto Set of the Group of Voters using the voters data frame
+
+paretoSetG1Again <- findParetoSetForDataFrame(generatedVoterDataFrame1)
+
+paretoSetG1Again
+
+
+paretoSetG2Again <- findParetoSetForDataFrame(generatedVoterDataFrame2)
+
+paretoSetG2Again
+
+
+
+paretoSetS1Again <- findParetoSetForDataFrame( staticVoterDataFrame1 )
+
+paretoSetS1Again
+
+
+
 
 
 # 6) Plot the voters and Pareto Set
+# Leave commented out when workign because they are slow. 
 
 
-plotParetoSet(generatedVoterDataFrame1, idealsOn  = TRUE)
+#   plotParetoSet(generatedVoterDataFrame1, idealsOn  = TRUE)
 
-plotParetoSet(generatedVoterDataFrame1, idealsOn = FALSE)
+#   plotParetoSet(generatedVoterDataFrame1, idealsOn = FALSE)
 
 
-plotParetoSet(staticVoterDataFrame1, idealsOn  = TRUE)
+#   plotParetoSet(generatedVoterDataFrame2, idealsOn  = TRUE)
 
-plotParetoSet(staticVoterDataFrame1, idealsOn = FALSE)
+#   plotParetoSet(generatedVoterDataFrame2, idealsOn = FALSE)
+
+
+
+#   plotParetoSet(staticVoterDataFrame1, idealsOn  = TRUE)
+
+#   plotParetoSet(staticVoterDataFrame1, idealsOn = FALSE)
 
 
 
 #7 ) Is an alternative in the Pareto Set, given the alt and the Pareto Set?
 
-isInParetoSetFromPointAndPS(aSexpPoint = c(0,0), aSexpMatrix = as.matrix(paretoSet)) # Should be TRUE for set.seed(123)
+isInParetoSetFromPointAndPS(aSexpPoint = c(0,0), aSexpMatrix = as.matrix(paretoSetG1)) 
 
-isInParetoSetFromPointAndPS(aSexpPoint = c(.25,.5), aSexpMatrix = as.matrix(paretoSet)) # Should be FALSE for set.seed(123)
+isInParetoSetFromPointAndPS(aSexpPoint = c(.25,.5), aSexpMatrix = as.matrix(paretoSetG1)) 
+
+
+
+isInParetoSetFromPointAndPS(aSexpPoint = c(0,0), aSexpMatrix = as.matrix(paretoSetG2)) 
+
+isInParetoSetFromPointAndPS(aSexpPoint = c(.25,.5), aSexpMatrix = as.matrix(paretoSetG2))
+
+
+isInParetoSetFromPointAndPS(aSexpPoint = c(0,0), aSexpMatrix = as.matrix(paretoSetS1)) # Should be false
+
+isInParetoSetFromPointAndPS(aSexpPoint = c(2/8, 2/8), aSexpMatrix = as.matrix(paretoSetS1)) # Should be true
+
 
 
 #8) Is an alternaive in the Pareto Set given the alt and a set of ideals.
 
-isInParetoSetFromPointAndIdeals(aSexpPoint = c(0,0), aSexpMatrix = ideals) # Should be TRUE for set.seed(123)
+idealsG1 <- cbind(generatedVoterDataFrame1$xLocation, generatedVoterDataFrame1$yLocation)
 
-isInParetoSetFromPointAndIdeals(aSexpPoint = c(.25,.5), aSexpMatrix = ideals) # Should be FALSE for set.seed(123)
+isInParetoSetFromPointAndIdeals(aSexpPoint = c(0,0), aSexpMatrix = idealsG1) 
+
+isInParetoSetFromPointAndIdeals(aSexpPoint = c(.25,.5), aSexpMatrix = idealsG1) 
 
 
-#9) Find the Minlowski Distance between two points to verify it is the same as the superelipse code:
+
+idealsG2 <- cbind(generatedVoterDataFrame2$xLocation, generatedVoterDataFrame2$yLocation)
+
+isInParetoSetFromPointAndIdeals(aSexpPoint = c(0,0), aSexpMatrix = idealsG2) 
+
+isInParetoSetFromPointAndIdeals(aSexpPoint = c(.25,.5), aSexpMatrix = idealsG2) 
+
+
+
+idealsS1 <- cbind(staticVoterDataFrame1$xLocation, staticVoterDataFrame1$yLocation)
+
+isInParetoSetFromPointAndIdeals(aSexpPoint = c(0,0), aSexpMatrix = idealsS1) # Should be false
+
+isInParetoSetFromPointAndIdeals(aSexpPoint = c(2/8, 2/8), aSexpMatrix = idealsS1)  # Should be true
+
+
+
+
+
+#9) Is an alternaive in the Pareto Set given the alt and the Voter Data Frame
+
+
+isInParetoSetForVoterDataFrame(alternativeToCheck = c(0,0), votersDataFrame = generatedVoterDataFrame1) 
+
+isInParetoSetForVoterDataFrame(alternativeToCheck = c(.25,.5), votersDataFrame = generatedVoterDataFrame1) 
+
+
+
+
+isInParetoSetForVoterDataFrame(alternativeToCheck = c(0,0), votersDataFrame = generatedVoterDataFrame2) 
+
+isInParetoSetForVoterDataFrame(alternativeToCheck = c(.25,.5), votersDataFrame = generatedVoterDataFrame2) 
+
+
+
+
+isInParetoSetForVoterDataFrame(alternativeToCheck = c(0,0), votersDataFrame = staticVoterDataFrame1) # Should be false
+
+isInParetoSetForVoterDataFrame(alternativeToCheck = c(2/8, 2/8), votersDataFrame = staticVoterDataFrame1)  # Should be true
+
+
+
+
+
+#9) For a set of Alternatives are they in the Pareto Set given the Alternatives Data Frame and the Voter Data Frame
+
+
+isInParetoSetForVoterAndAltsDataFrame(alternativesDataFrame = generatedAltsDataFrame1, votersDataFrame = generatedVoterDataFrame1) 
+
+
+isInParetoSetForVoterAndAltsDataFrame(alternativesDataFrame = generatedAltsDataFrame2, votersDataFrame = generatedVoterDataFrame2) 
+
+
+isInParetoSetForVoterAndAltsDataFrame(alternativesDataFrame = staticAltsDataFrame1, votersDataFrame = staticVoterDataFrame1) # Shouldl be FALSE TRUE FALSE
+
+
+
+# 10) Find the Minlowski Distance between two points to verify it is the same as the superelipse code:
 
 oneIdeal <- matrix(c(-.25,-.25),nrow = 1, ncol = 2)
 oneAlt <- matrix(c(.20,.10),nrow = 1, ncol = 2)
 theOrder <-  c(3)
 salience <- c(1,2)
 oneVoterID <- c(1)
+theLoss <-  c(1)
 
-minkowskiUtilityDistanceSets(idealsMatrix = oneIdeal, altsMatrix = oneAlt, orderVector = theOrder, salienceMatrix = matrix(salience, nrow = 1, ncol = 2))
+# First Find the Utility 
+testMinkoDist <- minkowskiUtilitySets(idealsMatrix = oneIdeal, altsMatrix = oneAlt, minkoOrderVector = theOrder, salienceMatrix = matrix(salience, nrow = 1, ncol = 2), lossOrderVector = theLoss)
 
-minkowskiUtilityPairOfPoints(idealVector = as.vector(oneIdeal), altVector = as.vector(oneAlt), orderScalar = theOrder, salienceVector = salience)
+# Now find the Super elipse Radius 
+testSuperElipseRadius <- findSuperElipseRadius(idealPoint = as.vector(oneIdeal), altPoint = as.vector(oneAlt), orderScalar = theOrder, salienceVector = salience)
 
-testRadius <- findSuperElipseRadius(idealPoint = as.vector(oneIdeal), altPoint = as.vector(oneAlt), orderScalar = theOrder, salienceVector = salience)
-
-
-# Now Find the Indifference Curve Point
-
-# 10) Find the Preferred to Sets for a group of voters and plot them 
-
-
-# Lots of heterogeneity of ideals, saliences and minkoOrders
-staticVoterDataFrame2 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), xIdeal=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, -.44), yIdeal=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.03), minkoOrder=c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
-
-
-staticVoterDataFrame3 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), xIdeal=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, -.44), yIdeal=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.03), minkoOrder=c(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+# Now check to make sure they are the same. 
+abs(testMinkoDist) == testSuperElipseRadius
 
 
 
-## First for one voter called vt
+
+# 10) Find the Preferred-to Sets for a group of voters and plot them 
+
+
+# A couple more Voter Data Frames with Lots of heterogeneity of ideals, saliences and minkoOrders
+staticVoterDataFrame2 <- data.frame(pointType= rep("voter",11), ID = c("V-1", "V-2", "V-3", "V-4", "V-5", "V-6", "V-7", "V-8", "V-9", "V-10", "V-11"), xLocation=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, -.44), yLocation=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.03), minkoOrder=c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), lossOrder=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) )
+
+
+staticVoterDataFrame3 <- data.frame(pointType= rep("voter",11), ID = c("V-1", "V-2", "V-3", "V-4", "V-5", "V-6", "V-7", "V-8", "V-9", "V-10", "V-11"), xLocation=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, -.44), yLocation=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.03), minkoOrder=c(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2), xSalience = c(1, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1), ySalience = c(1, 1, 2, 1, 3, 1, 4, 1, 5, 1, 6), lossOrder=c(1, 2, 2, 1, 1, 1, 2, 1, 1, 2, 1))
+
+
+
+
+
+# First for one voter and alt created just for this:
+findICPoints(voterID = "V-1", idealPoint = c(.5, .5), altPointVector = c(0,0), orderScalar = 2, salienceVector = c(1,1), precision = .01)
+
+# Now pull one voter form a voter matrix
 vt <- 2 
 
-findICPoints(voterID = staticVoterDataFrame1$voterID, idealPoint = c(staticVoterDataFrame1$xIdeal[vt], staticVoterDataFrame1$yIdeal[vt]), altPointVector = c(0,0), orderScalar = staticVoterDataFrame1$minkoOrder[vt], salienceVector = c(staticVoterDataFrame1$xSalience[vt], staticVoterDataFrame1$ySalience[vt]), precision = .01)
+findICPoints( voterID = staticVoterDataFrame1$ID[vt], 
+              idealPoint = c(staticVoterDataFrame1$xLocation[vt], staticVoterDataFrame1$yLocation[vt]), 
+              altPointVector = c(0,0), 
+              orderScalar = staticVoterDataFrame1$minkoOrder[vt], 
+              salienceVector = c(staticVoterDataFrame1$xSalience[vt], staticVoterDataFrame1$ySalience[vt]), 
+              precision = .01 )
+
 
 ## Now find the IC's for all the voters
-
-voterDataFrameAllICs <- findICsForSetOfVoters(votersDataFrame = staticVoterDataFrame1, altPoint = c(0,0), precision = .01)
+allICsStaticVoterDataFrame1 <- findICsForSetOfVoters(votersDataFrame = staticVoterDataFrame1, altPoint = c(0,0), precision = .01)
 
 
 plotIC(votersDataFrame = staticVoterDataFrame1, altPoint = c(0,0), precision = .01)
@@ -184,7 +284,7 @@ plotIC(votersDataFrame = staticVoterDataFrame3, altPoint = c(0,0), precision = .
     ## If you change everything to minkoOrder 1 you get Diamond Shaped ICs
 
         # All MinkoOrder = 1
-        staticVoterDataFrameAllMinko1 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), xIdeal=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32), yIdeal=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21), minkoOrder=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+        staticVoterDataFrameAllMinko1 <- data.frame(pointType= rep("voter",11), ID = c("V-1", "V-2", "V-3", "V-4", "V-5", "V-6", "V-7", "V-8", "V-9", "V-10", "V-11"), xLocation=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, .11), yLocation=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.11), minkoOrder=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), lossOrder=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) )
 
         voterDataFrameAllMinko1ICs <- findICsForSetOfVoters(votersDataFrame = staticVoterDataFrameAllMinko1, altPoint = c(0,0), precision = .01)
         
@@ -194,7 +294,7 @@ plotIC(votersDataFrame = staticVoterDataFrame3, altPoint = c(0,0), precision = .
     ## What about all minko Order 2?
 
         # All MinkoOrder = 2
-staticVoterDataFrameAllMinko2 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), xIdeal=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32), yIdeal=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21), minkoOrder=c(2, 2, 2, 2, 2, 2, 2, 2, 2, 2), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+staticVoterDataFrameAllMinko2 <- data.frame(pointType= rep("voter",11), ID = c("V-1", "V-2", "V-3", "V-4", "V-5", "V-6", "V-7", "V-8", "V-9", "V-10", "V-11"), xLocation=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, .11), yLocation=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.11), minkoOrder=c(2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), lossOrder=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) )
 
     voterDataFrameAllMinko2ICs <- findICsForSetOfVoters(votersDataFrame = staticVoterDataFrameAllMinko2, altPoint = c(0,0), precision = .01)
 
@@ -205,8 +305,8 @@ staticVoterDataFrameAllMinko2 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 
         
         ## What about all minko Order 4?
         
-        # All MinkoOrder = 4
-        staticVoterDataFrameAllMinko4 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), xIdeal=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32), yIdeal=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21), minkoOrder=c(4, 4, 4, 4, 4, 4, 4, 4, 4, 4), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))
+        # All MinkoOrder = 1000
+        staticVoterDataFrameAllMinko4 <- data.frame(pointType= rep("voter",11), ID = c("V-1", "V-2", "V-3", "V-4", "V-5", "V-6", "V-7", "V-8", "V-9", "V-10", "V-11"), xLocation=c(-.8, -.5, .2, .9, -.2, .15, -.15, -.35, .35, .32, .11), yLocation=c(.1, .5, -.3, 0, .9, -.7, .35, -.45, -.26, .21, -.11), minkoOrder= rep(1000, 11), xSalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), lossOrder=c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1) )
         
         voterDataFrameAllMinko4ICs <- findICsForSetOfVoters(votersDataFrame = staticVoterDataFrameAllMinko4, altPoint = c(0,0), precision = .01)
         
@@ -215,44 +315,50 @@ staticVoterDataFrameAllMinko2 <- data.frame(voterID = c(1, 2, 3, 4, 5, 6, 7, 8, 
 
     # 11) Now lets look at the plotteRvoteR function, using a common homework question scenario:      
         
-    simpleVoterDF <- data.frame(voterID = c(1, 2, 3, 4, 5), xIdeal=c(15, 20, 35, 40, 55), yIdeal=c(45, 15, 50, 35, 30), minkoOrder=c(2, 2, 2, 2, 2), xSalience = c(1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1) )
+        staticVoterDataFrame4 <- data.frame(pointType= rep("voter", 5), ID = c("V-1", "V-2", "V-3", "V-4", "V-5"), xLocation=c(15, 20, 35, 40, 55), yLocation=c(45, 15, 50, 35, 30), minkoOrder=c(2, 2, 2, 2, 2), xSalience = c(1, 1, 1, 1, 1), ySalience = c(1, 1, 1, 1, 1) )
         
-plotteRvoteR(votersDataFrame = simpleVoterDF, altPoints = c(30,40), plotIdeals = TRUE, plotICs = TRUE, plotPareto = TRUE, plotAlt = TRUE, yToXRatio = 1)
+    
+
+plotteRvoteR(votersDataFrame = staticVoterDataFrame4, altPoints = c(30,40), plotIdeals = TRUE, plotICs = TRUE, plotPareto = TRUE, plotAlts = TRUE, yToXRatio = 1)
         
 
 # 12) Now lets look at the plotteRvoteR function, with only 3 ideals, but with different Minko Orders:      
 
-verySimpleVoterDF <- data.frame(voterID = c(1, 2, 3), xIdeal=c(15, 20, 35), yIdeal=c(45, 15, 50), minkoOrder=c(1, 2, 3), xSalience = c(1, 1, 1), ySalience = c(1, 1, 1) )
+staticVoterDataFrame5 <- data.frame(pointType= rep("voter", 3), ID = c("V-1", "V-2", "V-3"), xLocation=c(15, 20, 35), yLocation=c(45, 15, 50), minkoOrder=c(1, 2, 100), xSalience = c(1, 1, 1), ySalience = c(1, 1, 1) )
 
-plotteRvoteR(votersDataFrame = verySimpleVoterDF, altPoints = c(30,40), plotIdeals = TRUE, plotICs = TRUE, plotPareto = FALSE, plotAlt = TRUE, yToXRatio = 1)
+plotteRvoteR(votersDataFrame = staticVoterDataFrame5, altPoints = c(30,40), plotIdeals = TRUE, plotICs = TRUE, plotPareto = FALSE, plotAlt = TRUE, yToXRatio = 1)
 
 
 # 13) Now lets look at the plotteRvoteR function, using the staticVoterDataFrameAll:      
 
 plotteRvoteR(votersDataFrame = staticVoterDataFrame1, altPoints = c(0,0), plotIdeals = TRUE, plotICs = TRUE, plotPareto = TRUE, plotAlt = TRUE, yToXRatio = 1)
 
-########################## HERE #######################################################################
-# 14) Is an alternaive in a set of a voter given an alt and an IC.
 
+# 14) Is alternaive B in the preferred to set of alternative A for a voter.
+
+## Looking at only voter 1
 vt <- 1
+ICToCheck <- findICPoints(voterID = staticVoterDataFrame5$ID, idealPoint = c(staticVoterDataFrame5$xLocation[vt], staticVoterDataFrame5$yLocation[vt]), altPointVector = c(0,0), orderScalar = staticVoterDataFrame5$minkoOrder[vt], salienceVector = c(staticVoterDataFrame5$xSalience[vt], staticVoterDataFrame5$ySalience[vt]), precision = .01)
 
-ICToCheck <- findICPoints(voterID = staticVoterDataFrameAll$voterID, idealPoint = c(staticVoterDataFrameAll$xIdeal[vt], staticVoterDataFrameAll$yIdeal[vt]), altPointVector = c(0,0), orderScalar = staticVoterDataFrameAll$minkoOrder[vt], salienceVector = c(staticVoterDataFrameAll$xSalience[vt], staticVoterDataFrameAll$ySalience[vt]), precision = .01)
+# Voter 1's IC for (0,0)
+plotIC(votersDataFramePlotIC = staticVoterDataFrame5[1, ], altPointPlotIC = c(0,0), precisionPlotIC = .01)
 
-plotIC(votersDataFramePlotIC = staticVoterDataFrameAll[1, ], altPointPlotIC = c(0,0), precisionPlotIC = .01)
 
-isInICFromPointAndIC(aSexpPoint = c(0,0), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be TRUE for set.seed(123)   ##TODO
+### This function isInICFromPointAndIC() needs to be generalized into a couple or wrappers like the isInPareto family of funcitons (01.31.2020) ##
+isInICFromPointAndIC(aSexpPoint = c(0,0), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be TRUE (0,0) is on the IC
 
-isInICFromPointAndIC(aSexpPoint = c(-1.5,0), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be TRUE for set.seed(123)   ##TODO
+isInICFromPointAndIC(aSexpPoint = c(-0.0001, -0.0001), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be FALSE as this is just outside the IC
 
-isInICFromPointAndIC(aSexpPoint = c(-1.5,0.5), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be FALSE for set.seed(123)   ##TODO
+isInICFromPointAndIC(aSexpPoint = c(15,45), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be TRUE (15,45) is the voters ideal point
 
-isInICFromPointAndIC(aSexpPoint = c(0,1), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be FALSE for set.seed(123)   ##TODO
+isInICFromPointAndIC(aSexpPoint = c(-25,25), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be TRUE as it is on the IC 
+
+isInICFromPointAndIC(aSexpPoint = c(-25.001,25), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be FALSE as it is just outside the IC.
+
+isInICFromPointAndIC(aSexpPoint = c(50,75), aSexpMatrix = as.matrix(ICToCheck[ ,2:3])) # Should be FALSE 
 
 
 
 
 # 16) For a set of voters and a set of alternatives, calculate each voter's minkowski distance between their ideal point and each alterantive (This is the voters full preference ordering over the alternatives) 
 
-
-
-minkoDist2 <- minkowskiUtilityDistanceSets(idealsMatrix = as.matrix(ideals), altsMatrix = altsGen2, orderVector = rep(2,nrow(ideals)), salienceMatrix = salience)

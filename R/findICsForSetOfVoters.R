@@ -19,11 +19,23 @@
 #' @export
 findICsForSetOfVoters <- function(votersDataFrame, altPoint, precision){
     
+    # ### FOR TESTING ###
+    # votersDataFrame <- data.frame(pointType = rep(x = "voter", 3), ID = c("V-1", "V-2", "V-3"), xLocation=c(-1/8, 7/8, 4/8), yLocation=c(3/8, 4/8, -3/8), minkoOrder=c(1, 2, 100), xSalience = c(1, 1, 1), ySalience = c(1, 1, 1), lossOrder = c(1, 2, 1) )
+    # altPoint <- c(1/8,1/8)
+    # precision <- .01
+    # 
+    # ### FOR TESTING ###
+    
     # create
     allVotersICPointsList <- list()
     
     for (j in 1:nrow(votersDataFrame)){
-        allVotersICPointsList[[j]] <- findICPoints(voterID = votersDataFrame$voterID[j], idealPoint = c(votersDataFrame$xIdeal[j], votersDataFrame$yIdeal[j]), orderScalar = votersDataFrame$minkoOrder[j], salienceVector = c(votersDataFrame$xSalience[j], votersDataFrame$ySalience[j]), altPointVector = altPoint, precision = .01)
+        allVotersICPointsList[[j]] <- findICPoints(voterID = votersDataFrame$ID[j], 
+                                                    idealPoint = c(votersDataFrame$xLocation[j], votersDataFrame$yLocation[j]), 
+                                                    orderScalar = votersDataFrame$minkoOrder[j], 
+                                                    salienceVector = c(votersDataFrame$xSalience[j], votersDataFrame$ySalience[j]), 
+                                                    altPointVector = altPoint, 
+                                                    precision = .01)
     }
     
 #    allVotersPrefToSetsDF <- do.call(rbind.data.frame, allVotersICPointsList)

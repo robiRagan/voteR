@@ -4,8 +4,12 @@
 \alias{minkowskiDistanceSets}
 \title{minkowskiDistanceSets}
 \usage{
-minkowskiDistanceSets(idealsMatrix, altsMatrix, minkoOrderVector,
-  salienceMatrix)
+minkowskiDistanceSets(
+  idealsMatrix,
+  altsMatrix,
+  minkoOrderVector,
+  salienceMatrix
+)
 }
 \arguments{
 \item{idealsMatrix}{A numberVoters x numberDimensions matrix of numerics.
@@ -24,7 +28,7 @@ if entry in the matrix at location (d=2,d1=2,d=2) is <.25,.75> then the
 location of that alternative in the two dimensional issue space is at
 .25,.75.}
 
-\item{minkoOrderVector}{A numVoters lengh vector of doubles. It is the ``order" 
+\item{minkoOrderVector}{A numVoters length vector of doubles. It is the ``order" 
 of the Minkowski Distance being used. In this packge it should be an 
 element of [1,100]. Examples for cases where the salience on all 
 dimensions is equal: 1 = Manhattan Distance.  diamond shaped indifference
@@ -63,13 +67,15 @@ different 'order' for their Minkowski Distance and a set of `sailence`
 weights for each policy dimension.
 }
 \seealso{
-Other minkowski: \code{\link{minkowskiDistancePairOfPoints}},
-  \code{\link{minkowskiUtilitySets}},
-  \code{\link{prefOrderMinko}}
+Other minkowski: 
+\code{\link{minkowskiDistancePairOfPoints}()},
+\code{\link{minkowskiUtilitySets}()},
+\code{\link{prefOrderMinko}()}
 
-Other utility functions: \code{\link{minkowskiDistancePairOfPoints}},
-  \code{\link{minkowskiUtilitySets}},
-  \code{\link{prefOrderMinko}}
+Other utility functions: 
+\code{\link{minkowskiDistancePairOfPoints}()},
+\code{\link{minkowskiUtilitySets}()},
+\code{\link{prefOrderMinko}()}
 }
 \concept{minkowski}
 \concept{utility functions}

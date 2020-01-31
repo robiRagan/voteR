@@ -4,8 +4,12 @@
 \alias{minkowskiDistancePairOfPoints}
 \title{minkowskiDistancePairOfPoints}
 \usage{
-minkowskiDistancePairOfPoints(idealVector, altVector, orderScalar,
-  salienceVector)
+minkowskiDistancePairOfPoints(
+  idealVector,
+  altVector,
+  orderScalar,
+  salienceVector
+)
 }
 \arguments{
 \item{orderScalar}{The ``order" of the Minkowski Distance being used. In
@@ -47,13 +51,15 @@ This function will find the salience weighted Minkowski Distance between a
 pair of points. For example an ideal point and an alternative.
 }
 \seealso{
-Other minkowski: \code{\link{minkowskiDistanceSets}},
-  \code{\link{minkowskiUtilitySets}},
-  \code{\link{prefOrderMinko}}
+Other minkowski: 
+\code{\link{minkowskiDistanceSets}()},
+\code{\link{minkowskiUtilitySets}()},
+\code{\link{prefOrderMinko}()}
 
-Other utility functions: \code{\link{minkowskiDistanceSets}},
-  \code{\link{minkowskiUtilitySets}},
-  \code{\link{prefOrderMinko}}
+Other utility functions: 
+\code{\link{minkowskiDistanceSets}()},
+\code{\link{minkowskiUtilitySets}()},
+\code{\link{prefOrderMinko}()}
 }
 \concept{minkowski}
 \concept{utility functions}
