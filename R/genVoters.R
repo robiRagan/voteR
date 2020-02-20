@@ -61,7 +61,22 @@
 # probabilityElipticalGenVoters = 1 
 # probabilityDiamondGenVoters = 0
 # probabilitySquareGenVoters = 0
-genVoters <- function(numberOfDimensionsGenVoters=1, numberOfVotersGenVoters=15, distributionTypeGenVoters ="unif", distributionParametersGenVoters = c(-1,1), dimOneBoundsGenVoters = c(-Inf,Inf), dimTwoBoundsGenVoters = c(-Inf,Inf), salienceHeterogeneityGenVoters=1, maxRelativeSalienceGenVoters=2, allEllipticalGenVoters = TRUE, probabilityElipticalGenVoters = 1, probabilityDiamondGenVoters = 0, probabilitySquareGenVoters = 0, lossOrderForAllGenVoters=FALSE, probabilityLinearGenVoters=1, probabilityQuadraticGenVoters=0, probabilityCubicGenVoters=0){
+genVoters <- function(numberOfDimensionsGenVoters=1, 
+                        numberOfVotersGenVoters=15, 
+                        distributionTypeGenVoters ="unif", 
+                        distributionParametersGenVoters = c(-1,1), 
+                        dimOneBoundsGenVoters = c(-Inf,Inf), 
+                        dimTwoBoundsGenVoters = c(-Inf,Inf), 
+                        salienceHeterogeneityGenVoters=1, 
+                        maxRelativeSalienceGenVoters=2, 
+                        allEllipticalGenVoters = TRUE, 
+                        probabilityElipticalGenVoters = 1, 
+                        probabilityDiamondGenVoters = 0, 
+                        probabilitySquareGenVoters = 0, 
+                        lossOrderForAllGenVoters=FALSE, 
+                        probabilityLinearGenVoters=1, 
+                        probabilityQuadraticGenVoters=0, 
+                        probabilityCubicGenVoters=0){
 
     # 1) Generate Ideals
     tempIdeals <- genIdeals(numberOfDimensionsGenIdeals = numberOfDimensionsGenVoters, numberOfIdealsGenIdeals = numberOfVotersGenVoters, distributionTypeGenIdeals = distributionTypeGenVoters, distributionParametersGenIdeals = distributionParametersGenVoters, dimOneBoundsGenIdeals = dimOneBoundsGenVoters, dimTwoBoundsGenIdeals = dimTwoBoundsGenVoters)

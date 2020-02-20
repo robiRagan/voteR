@@ -11,7 +11,6 @@ distToMargMed <- function(competitorDataFrameDistToMargMed, marginalMedianDistTo
     outDistToMargMed <- data.frame(matrix(rep(NA,nrow(currentCompetitorPositions)), nrow = 1))
     names(outDistToMargMed) <- competitorDataFrameDistToMargMed$competitorID
     
-    ## TEST ##
     for (i in 1:nrow(competitorDataFrameDistToMargMed) ){
         outDistToMargMed[i] <- dist(rbind(c(competitorDataFrameDistToMargMed$xLocation[i],competitorDataFrameDistToMargMed$yLocation[i]), c(marginalMedianDistToMargMedian$xMedian, marginalMedianDistToMargMedian$yMedian) ))
     }
